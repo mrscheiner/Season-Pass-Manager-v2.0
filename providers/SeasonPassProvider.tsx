@@ -405,12 +405,8 @@ const INITIAL_BACKUP_DATA = {
     },
     "2": {
       "pair1": {"gameId":"2","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":59.17,"paymentStatus":"paid","soldDate":"2025-10-15T02:13:34.487Z"},
-<<<<<<< HEAD
-      "pair3": {"gameId":"2","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":21.2,"paymentStatus":"paid","soldDate":"2025-10-15T02:16:08.870Z"}
-=======
       "pair2": {"gameId":"2","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":23.4,"paymentStatus":"paid","soldDate":"2025-10-15T02:13:38.571Z"},
       "pair3": {"gameId":"2","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":27.2,"paymentStatus":"paid","soldDate":"2025-10-15T02:16:08.870Z"}
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     },
     "3": {
       "pair1": {"gameId":"3","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":128,"paymentStatus":"paid","soldDate":"2025-10-29T15:51:27.650Z"},
@@ -424,13 +420,8 @@ const INITIAL_BACKUP_DATA = {
     },
     "5": {
       "pair1": {"gameId":"5","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":153,"paymentStatus":"paid","soldDate":"2025-10-29T15:50:46.000Z"},
-<<<<<<< HEAD
-      "pair3": {"gameId":"5","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":72,"paymentStatus":"paid","soldDate":"2025-10-29T15:48:14.370Z"},
-      "pair2": {"gameId":"5","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":62.2,"paymentStatus":"paid","soldDate":"2025-10-29T15:50:48.484Z"}
-=======
       "pair2": {"gameId":"5","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":52.2,"paymentStatus":"paid","soldDate":"2025-10-29T15:50:48.484Z"},
       "pair3": {"gameId":"5","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":72,"paymentStatus":"paid","soldDate":"2025-10-29T15:48:14.370Z"}
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     },
     "6": {
       "pair1": {"gameId":"6","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":37.8,"paymentStatus":"paid","soldDate":"2025-11-05T18:19:48.742Z"},
@@ -454,13 +445,8 @@ const INITIAL_BACKUP_DATA = {
     },
     "10": {
       "pair1": {"gameId":"10","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":59.4,"paymentStatus":"paid","soldDate":"2026-01-16T16:20:12.299Z"},
-<<<<<<< HEAD
-      "pair3": {"gameId":"10","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":21.87,"paymentStatus":"paid","soldDate":"2026-01-16T16:32:01.650Z"},
-      "pair2": {"gameId":"10","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":26.69,"paymentStatus":"paid","soldDate":"2026-01-16T16:20:32.374Z"}
-=======
       "pair2": {"gameId":"10","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":19.96,"paymentStatus":"paid","soldDate":"2026-01-16T16:20:32.374Z"},
       "pair3": {"gameId":"10","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":21.87,"paymentStatus":"paid","soldDate":"2026-01-16T16:32:01.650Z"}
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     },
     "11": {
       "pair1": {"gameId":"11","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":48.94,"paymentStatus":"paid","soldDate":"2026-01-16T16:21:19.116Z"},
@@ -493,15 +479,9 @@ const INITIAL_BACKUP_DATA = {
       "pair3": {"gameId":"16","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":29.99,"paymentStatus":"paid","soldDate":"2026-01-16T16:33:38.805Z"}
     },
     "17": {
-<<<<<<< HEAD
-      "pair1": {"gameId":"17","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":12.6,"paymentStatus":"paid","soldDate":"2026-01-16T16:26:48.587Z"},
-      "pair3": {"gameId":"17","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":43.2,"paymentStatus":"paid","soldDate":"2026-01-16T16:33:57.967Z"},
-      "pair2": {"gameId":"17","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":16.18,"paymentStatus":"paid","soldDate":"2026-01-16T16:39:56.584Z"}
-=======
       "pair1": {"gameId":"17","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":72.09,"paymentStatus":"paid","soldDate":"2026-01-16T16:26:48.587Z"},
       "pair2": {"gameId":"17","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":16.18,"paymentStatus":"paid","soldDate":"2026-01-16T16:39:56.584Z"},
       "pair3": {"gameId":"17","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":12.6,"paymentStatus":"paid","soldDate":"2026-01-16T16:33:57.967Z"}
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     },
     "18": {
       "pair1": {"gameId":"18","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":86.94,"paymentStatus":"paid","soldDate":"2026-01-16T16:27:17.967Z"},
@@ -544,14 +524,8 @@ const INITIAL_BACKUP_DATA = {
       "pair3": {"gameId":"25","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":81.81,"paymentStatus":"paid","soldDate":"2026-01-16T16:37:18.229Z"}
     },
     "26": {
-<<<<<<< HEAD
-      "pair1": {"gameId":"26","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":33.73,"paymentStatus":"paid","soldDate":"2026-01-15T15:33:42.803Z"},
-      "pair2": {"gameId":"26","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":33.73,"paymentStatus":"paid","soldDate":"2026-01-16T15:59:24.462Z"},
-      "pair3": {"gameId":"26","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":99,"paymentStatus":"paid","soldDate":"2026-01-16T15:59:24.462Z"}
-=======
       "pair1": {"gameId":"26","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":200.25,"paymentStatus":"paid","soldDate":"2026-01-16T16:30:46.716Z"},
       "pair2": {"gameId":"26","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":33.73,"paymentStatus":"pending","soldDate":"2026-01-16T15:59:24.462Z"}
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     },
     "27": {
       "pair1": {"gameId":"27","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":99,"paymentStatus":"pending","soldDate":"2026-01-15T15:33:42.803Z"},
@@ -559,25 +533,6 @@ const INITIAL_BACKUP_DATA = {
       "pair3": {"gameId":"27","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":36.2,"paymentStatus":"pending","soldDate":"2026-01-21T08:05:43.591Z"}
     },
     "28": {
-<<<<<<< HEAD
-      "pair2": {"gameId":"28","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":120.6,"paymentStatus":"paid","soldDate":"2026-01-16T14:29:30.101Z"},
-      "pair1": {"gameId":"28","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":230.4,"paymentStatus":"paid","soldDate":"2026-01-16T15:51:18.763Z"},
-      "pair3": {"gameId":"28","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":240.4,"paymentStatus":"paid","soldDate":"2026-01-16T15:51:18.763Z"}
-    },
-    "29": {
-      "pair1": {"gameId":"29","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":130.36,"paymentStatus":"paid","soldDate":"2025-12-19T03:34:51.167Z"},
-      "pair2": {"gameId":"29","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":400.2,"paymentStatus":"paid","soldDate":"2025-12-19T03:34:51.167Z"},
-      "pair3": {"gameId":"29","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":1,"paymentStatus":"paid","soldDate":"2025-12-19T03:34:51.167Z"}
-    },
-    "30": {
-      "pair1": {"gameId":"30","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":400.2,"paymentStatus":"paid","soldDate":"2025-12-19T03:34:51.167Z"},
-      "pair2": {"gameId":"30","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":34.42,"paymentStatus":"paid","soldDate":"2025-12-19T03:34:51.167Z"}
-    },
-    "p2": {
-      "pair1": {"gameId":"p2","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":37.48,"paymentStatus":"paid","soldDate":"2025-10-15T02:13:07.248Z"},
-      "pair3": {"gameId":"p2","pairId":"pair3","section":"325","row":"5","seats":"6-7","price":21.6,"paymentStatus":"paid","soldDate":"2025-10-15T02:15:46.615Z"},
-      "pair2": {"gameId":"p2","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":14.31,"paymentStatus":"paid","soldDate":"2025-10-15T02:13:10.899Z"}
-=======
       "pair1": {"gameId":"28","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":34.9,"paymentStatus":"pending","soldDate":"2026-01-21T08:05:02.348Z"},
       "pair2": {"gameId":"28","pairId":"pair2","section":"308","row":"8","seats":"1-2","price":120.6,"paymentStatus":"pending","soldDate":"2026-01-16T14:29:30.101Z"}
     },
@@ -586,7 +541,6 @@ const INITIAL_BACKUP_DATA = {
     },
     "30": {
       "pair1": {"gameId":"30","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":130.36,"paymentStatus":"pending","soldDate":"2025-12-19T03:34:51.167Z"}
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     },
     "p1": {
       "pair1": {"gameId":"p1","pairId":"pair1","section":"129","row":"26","seats":"24-25","price":33.77,"paymentStatus":"paid","soldDate":"2025-10-15T02:12:54.008Z"},
@@ -1589,54 +1543,8 @@ export const [SeasonPassProvider, useSeasonPass] = createContextHook(() => {
           await saveSeasonPasses(bf.migrated);
           setSeasonPasses(bf.migrated);
         }
-<<<<<<< HEAD
-
-        // Force refresh all logos from schedule (always run to ensure logos are up-to-date)
-        const forceLogoRefresh = async (list: SeasonPass[]) => {
-          console.log('[SeasonPass] 🔄 Force refreshing all logos from schedule...');
-          const scheduleGamesById: Record<string, Game> = {};
-          PANTHERS_20252026_SCHEDULE.forEach(g => { 
-            console.log(`[Logo] Schedule game ${g.id}: ${g.opponent} -> ${g.opponentLogo ? 'HAS LOGO' : 'NO LOGO'}`);
-            scheduleGamesById[g.id] = g; 
-          });
-
-          const updated = list.map(p => {
-            console.log(`[Logo] Processing pass: ${p.teamName}, games: ${p.games?.length || 0}`);
-            const gamesClone = (p.games || []).map(g => {
-              const scheduleLogo = scheduleGamesById[g.id]?.opponentLogo;
-              console.log(`[Logo] Game ${g.id}: ${g.opponent} - Schedule logo: ${scheduleLogo ? 'YES' : 'NO'}, Current logo: ${g.opponentLogo ? 'YES' : 'NO'}`);
-              return {
-                ...g,
-                opponentLogo: scheduleLogo || g.opponentLogo
-              };
-            });
-
-            const salesClone: any = JSON.parse(JSON.stringify(p.salesData || {}));
-            Object.entries(salesClone).forEach(([gameId, gameSales]: any) => {
-              const scheduleLogo = scheduleGamesById[gameId]?.opponentLogo;
-              if (scheduleLogo) {
-                Object.entries(gameSales).forEach(([pairId, sale]: any) => {
-                  if (sale) sale.opponentLogo = scheduleLogo;
-                });
-              }
-            });
-
-            return { ...p, games: gamesClone, salesData: salesClone } as SeasonPass;
-          });
-
-          await saveSeasonPasses(updated);
-          console.log('[SeasonPass] ✅ Logo refresh complete');
-          return updated;
-        };
-
-        passes = await forceLogoRefresh(passes);
-        setSeasonPasses(passes);
-      } catch (e: any) {
-        console.warn('[SeasonPass] Backfill failed:', e);
-=======
       } catch (backfillError) {
         console.warn('[SeasonPass] Backfill failed:', backfillError);
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
       }
     } catch (error) {
       console.error('[SeasonPass] Error loading data:', error);
@@ -1712,15 +1620,7 @@ export const [SeasonPassProvider, useSeasonPass] = createContextHook(() => {
         console.log(`[FillLogos] Game ${idx + 1}: ⚠️ No logo found for "${opp}"`);
         return g;
       });
-<<<<<<< HEAD
-      
-      console.log(`[FillLogos] Complete: Filled ${filledCount} of ${games.length} games`);
-      return result;
-    } catch (e: any) {
-      console.error('[FillLogos] Error:', e);
-=======
     } catch {
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
       return games;
     }
   };
@@ -2044,17 +1944,6 @@ export const [SeasonPassProvider, useSeasonPass] = createContextHook(() => {
   }, [seasonPasses]);
 
   const updateSeasonPass = useCallback(async (passId: string, updates: Partial<SeasonPass>) => {
-<<<<<<< HEAD
-    setSeasonPasses(currentPasses => {
-      const updatedPasses = currentPasses.map(sp => 
-        sp.id === passId ? { ...sp, ...updates } : sp
-      );
-      saveSeasonPasses(updatedPasses);
-      console.log('[SeasonPass] Updated season pass:', passId);
-      return updatedPasses;
-    });
-  }, [saveSeasonPasses]);
-=======
     // CRITICAL: Read from storage first to avoid race conditions
     let currentPasses: SeasonPass[] = seasonPasses;
     try {
@@ -2076,7 +1965,6 @@ export const [SeasonPassProvider, useSeasonPass] = createContextHook(() => {
     const backupResult = await performAutoBackup(updatedPasses, activeSeasonPassId);
     console.log('[SeasonPass] Updated season pass:', passId, '- Backup:', backupResult.success ? 'SUCCESS' : 'FAILED');
   }, [seasonPasses, activeSeasonPassId, performAutoBackup]);
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
 
   // Deletes a season pass after confirming with the user.
   // Returns the new number of season passes after deletion, or null if the user cancelled.
@@ -2356,56 +2244,35 @@ export const [SeasonPassProvider, useSeasonPass] = createContextHook(() => {
 
           setSeasonPasses(currentPasses => {
             const updatedPasses = currentPasses.map(sp => {
-              if (sp.id !== passId) return sp;
+              if (sp.id !== passId) return normalizeSeasonPass(sp);
 
               // Backfill opponentLogo into any existing sales for the updated games
               const updatedSalesData: any = { ...(sp.salesData || {}) };
               for (const g of gamesWithLogos) {
+                if (!g.opponentLogo) continue;
                 const gid = g.id;
-                if (updatedSalesData[gid]) {
-                  const cloned = { ...updatedSalesData[gid] };
-                  Object.keys(cloned).forEach(k => {
-                    const s = { ...cloned[k] } as any;
-                    if (!s.opponentLogo && g.opponentLogo) s.opponentLogo = g.opponentLogo;
-                    cloned[k] = s;
-                  });
-                  updatedSalesData[gid] = cloned;
+                const bySeat = updatedSalesData[gid];
+                if (!bySeat) continue;
+
+                const cloned: any = { ...bySeat };
+                for (const seatKey of Object.keys(cloned)) {
+                  const sale = { ...cloned[seatKey] } as any;
+                  if (!sale.opponentLogo) sale.opponentLogo = g.opponentLogo;
+                  cloned[seatKey] = sale;
                 }
-<<<<<<< HEAD
-=======
-
-                return g;
-              });
-            } catch {
-              return games;
-            }
-          };
-
-          const gamesWithLogos = fillOpponentLogos(result.games, pass.leagueId);
-
-          const updatedPasses = seasonPasses.map(sp => {
-            if (sp.id !== passId) return sp;
-
-            // Backfill opponentLogo into any existing sales for the updated games
-            const updatedSalesData: any = { ...(sp.salesData || {}) };
-            for (const g of gamesWithLogos) {
-              const gid = g.id;
-              if (updatedSalesData[gid]) {
-                const cloned = { ...updatedSalesData[gid] };
-                Object.keys(cloned).forEach(k => {
-                  const s = { ...cloned[k] } as any;
-                  if (!s.opponentLogo && g.opponentLogo) s.opponentLogo = g.opponentLogo;
-                  cloned[k] = s;
-                });
                 updatedSalesData[gid] = cloned;
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
               }
 
               return normalizeSeasonPass({ ...sp, games: gamesWithLogos, salesData: updatedSalesData });
             });
+
             AsyncStorage.setItem(SEASON_PASSES_KEY, JSON.stringify(updatedPasses));
             return updatedPasses;
           });
+
+          // Keep the active id set to this pass (and persisted)
+          setActiveSeasonPassId(passId);
+          await saveActiveId(passId);
           console.log('[Resync] ✅ Schedule resynced successfully:', result.games.length, 'HOME games');
           success = true;
         } else {
@@ -2499,36 +2366,6 @@ export const [SeasonPassProvider, useSeasonPass] = createContextHook(() => {
   }, [activeSeasonPass?.id, isLoadingSchedule]);
 
   const addEvent = useCallback(async (passId: string, event: Event) => {
-<<<<<<< HEAD
-    setSeasonPasses(currentPasses => {
-      const pass = currentPasses.find(sp => sp.id === passId);
-      if (pass) {
-        const updatedEvents = [...pass.events, event];
-        const updatedPasses = currentPasses.map(sp =>
-          sp.id === passId ? { ...sp, events: updatedEvents } : sp
-        );
-        AsyncStorage.setItem(SEASON_PASSES_KEY, JSON.stringify(updatedPasses));
-        return updatedPasses;
-      }
-      return currentPasses;
-    });
-  }, []);
-
-  const removeEvent = useCallback(async (passId: string, eventId: string) => {
-    setSeasonPasses(currentPasses => {
-      const pass = currentPasses.find(sp => sp.id === passId);
-      if (pass) {
-        const updatedEvents = pass.events.filter(e => e.id !== eventId);
-        const updatedPasses = currentPasses.map(sp =>
-          sp.id === passId ? { ...sp, events: updatedEvents } : sp
-        );
-        AsyncStorage.setItem(SEASON_PASSES_KEY, JSON.stringify(updatedPasses));
-        return updatedPasses;
-      }
-      return currentPasses;
-    });
-  }, []);
-=======
     const pass = seasonPasses.find(sp => sp.id === passId);
     if (pass) {
       const updatedEvents = [...pass.events, event];
@@ -2545,7 +2382,6 @@ export const [SeasonPassProvider, useSeasonPass] = createContextHook(() => {
       console.log('[SeasonPass] Removed event - auto-backup triggered via updateSeasonPass');
     }
   }, [seasonPasses, updateSeasonPass]);
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
 
   const clearAllData = useCallback(async () => {
     setSeasonPasses([]);
@@ -2739,135 +2575,6 @@ export const [SeasonPassProvider, useSeasonPass] = createContextHook(() => {
 
   const restorePanthersData = restoreAllSeasonPassData;
 
-<<<<<<< HEAD
-  // Force-replace version of restoreAllSeasonPassData: when a pass exists
-  // in the current state, overwrite its salesData and other fields from
-  // the backup rather than merging. This is used for cases where we want
-  // the backup to fully replace device state (used by Settings -> Force Replace).
-  const restoreAllSeasonPassDataReplace = useCallback(async (): Promise<boolean> => {
-    console.log('[SeasonPass] Restoring (FORCE REPLACE) all season pass data from backups...');
-    try {
-      let backupRaw = await AsyncStorage.getItem(ALL_PASSES_BACKUP_KEY);
-
-      if (backupRaw) {
-        try {
-          const allPassesBackup = JSON.parse(backupRaw);
-          if (allPassesBackup.passes && Array.isArray(allPassesBackup.passes) && allPassesBackup.passes.length > 0) {
-            console.log('[SeasonPass] ✅ Found', allPassesBackup.passes.length, 'passes in all-passes backup (force replace)');
-
-            const currentPasses = [...seasonPasses];
-            const restoredPasses: SeasonPass[] = [];
-
-            for (const backupPass of allPassesBackup.passes) {
-              const existingPass = currentPasses.find(p => p.id === backupPass.id);
-              if (existingPass) {
-                // FORCE: overwrite existing pass fields with backup values
-                const replacedPass = normalizeSeasonPass({
-                  ...existingPass,
-                  seatPairs: (backupPass.seatPairs && backupPass.seatPairs.length > 0) ? backupPass.seatPairs : existingPass.seatPairs,
-                  salesData: (backupPass.salesData as Record<string, Record<string, SaleRecord>>) || {},
-                  games: (backupPass.games && backupPass.games.length > 0) ? backupPass.games : existingPass.games,
-                });
-                restoredPasses.push(replacedPass);
-              } else {
-                restoredPasses.push(normalizeSeasonPass(backupPass));
-              }
-            }
-
-            // Add any current passes not in backup (preserve them)
-            for (const currentPass of currentPasses) {
-              if (!restoredPasses.find(p => p.id === currentPass.id)) {
-                restoredPasses.push(normalizeSeasonPass(currentPass));
-              }
-            }
-
-            setSeasonPasses(restoredPasses);
-            await saveSeasonPasses(restoredPasses);
-
-            const activeId = restoredPasses[0]?.id || null;
-            setActiveSeasonPassId(activeId);
-            await saveActiveId(activeId);
-            setNeedsSetup(restoredPasses.length === 0);
-
-            console.log('[SeasonPass] ✅ Force-replaced', restoredPasses.length, 'passes from all-passes backup');
-            return true;
-          }
-        } catch (e: any) {
-          console.warn('[SeasonPass] Failed to parse all-passes backup (force replace):', e);
-        }
-      }
-
-      // Fall back to master backup for force replace
-      backupRaw = await AsyncStorage.getItem(MASTER_BACKUP_KEY);
-      if (!backupRaw) {
-        console.log('[SeasonPass] No master backup found for force replace, falling back to Panthers default data');
-        // If there's no backup, behave like the non-force restore (seed if missing)
-        const panthersPass = await safeSeedPanthersIfEmpty();
-        if (!panthersPass) return false;
-        const normalizedPass = normalizeSeasonPass(panthersPass);
-        const updatedPasses = [...seasonPasses.map(normalizeSeasonPass), normalizedPass];
-        setSeasonPasses(updatedPasses);
-        setActiveSeasonPassId(normalizedPass.id);
-        setNeedsSetup(false);
-        await saveSeasonPasses(updatedPasses);
-        await saveActiveId(normalizedPass.id);
-        console.log('[SeasonPass] ✅ Panthers data seeded for force replace fallback');
-        return true;
-      }
-
-      const backup: BackupData = JSON.parse(backupRaw);
-      console.log('[SeasonPass] Found master backup for force replace with', backup.seasonPasses?.length || 0, 'passes from', backup.createdAtISO);
-
-      if (!backup.seasonPasses || backup.seasonPasses.length === 0) {
-        console.log('[SeasonPass] Master backup is empty (force replace), cannot restore');
-        return false;
-      }
-
-      const currentPasses = [...seasonPasses];
-      const restoredPasses: SeasonPass[] = [];
-
-      for (const backupPass of backup.seasonPasses) {
-        const existingPass = currentPasses.find(p => p.id === backupPass.id);
-        if (existingPass) {
-          const replacedPass = normalizeSeasonPass({
-            ...existingPass,
-            seatPairs: (backupPass.seatPairs && backupPass.seatPairs.length > 0) ? backupPass.seatPairs : existingPass.seatPairs,
-            salesData: (backupPass.salesData as Record<string, Record<string, SaleRecord>>) || {},
-            games: (backupPass.games && backupPass.games.length > 0) ? backupPass.games : existingPass.games,
-          });
-          restoredPasses.push(replacedPass);
-        } else {
-          restoredPasses.push(normalizeSeasonPass(backupPass));
-        }
-      }
-
-      for (const currentPass of currentPasses) {
-        if (!restoredPasses.find(p => p.id === currentPass.id)) {
-          restoredPasses.push(normalizeSeasonPass(currentPass));
-        }
-      }
-
-      setSeasonPasses(restoredPasses);
-      await saveSeasonPasses(restoredPasses);
-
-      const activeId = backup.activeSeasonPassId && restoredPasses.find(p => p.id === backup.activeSeasonPassId)
-        ? backup.activeSeasonPassId
-        : restoredPasses[0]?.id || null;
-
-      setActiveSeasonPassId(activeId);
-      await saveActiveId(activeId);
-      setNeedsSetup(restoredPasses.length === 0);
-
-      console.log('[SeasonPass] ✅ All season pass data FORCE-REPLACED successfully:', restoredPasses.length, 'passes');
-      return true;
-    } catch (error) {
-      console.error('[SeasonPass] Failed to force-replace from master backup:', error);
-      return false;
-    }
-  }, [seasonPasses, saveSeasonPasses, saveActiveId]);
-
-  const isInitialLoad = useRef(true);
-=======
   const forceReplacePanthersSales = useCallback(async (): Promise<{ success: boolean; salesCount: number }> => {
     console.log('[SeasonPass] FORCE REPLACING Panthers sales data with canonical INITIAL_BACKUP_DATA...');
     console.log('[SeasonPass] ========== WIPE + REPLACE MODE ==========');
@@ -3031,7 +2738,6 @@ export const [SeasonPassProvider, useSeasonPass] = createContextHook(() => {
     },
     [activeSeasonPassId, seasonPasses],
   );
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
 
   useEffect(() => {
     if (isInitialLoad.current) {
@@ -4227,13 +3933,6 @@ export const [SeasonPassProvider, useSeasonPass] = createContextHook(() => {
     exportAsCSV,
     emailBackup,
       prepareBackupPackage,
-<<<<<<< HEAD
-      restorePanthersData,
-      restoreAllSeasonPassData,
-      // New: force-replace restore (overwrites existing salesData instead of merging)
-      restoreAllSeasonPassDataReplace,
-      importSchedule,
-=======
     restorePanthersData,
     restoreAllSeasonPassData,
     forceReplacePanthersSales,
@@ -4243,6 +3942,5 @@ export const [SeasonPassProvider, useSeasonPass] = createContextHook(() => {
     backupError,
     backupConfirmationMessage,
     retryBackup,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   };
 });

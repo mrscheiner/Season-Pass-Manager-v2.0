@@ -106,10 +106,18 @@ export default function AnalyticsScreen() {
                 const height = item.revenue > 0 ? (item.revenue / maxRevenue) * 200 : 4;
                 return (
                   <View key={index} style={styles.barContainer}>
-                    {item.revenue > 0 && (
-                      <Text style={styles.barValue}>${item.revenue.toFixed(0)}</Text>
-                    )}
                     <View style={styles.barWrapper}>
+                      {item.revenue > 0 && (
+                        <Text
+                          style={[styles.barValue, { bottom: height + 6 }]}
+                          numberOfLines={1}
+                          ellipsizeMode="clip"
+                          adjustsFontSizeToFit
+                          minimumFontScale={0.7}
+                        >
+                          ${item.revenue.toFixed(0)}
+                        </Text>
+                      )}
                       <View 
                         style={[
                           styles.bar, 
@@ -204,16 +212,10 @@ export default function AnalyticsScreen() {
             </View>
           </View>
         </View>
-<<<<<<< HEAD
-        </ScrollView>
-      </SafeAreaView>
-    </View>
-=======
-
         <AppFooter />
       </ScrollView>
     </SafeAreaView>
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
+  </View>
   );
 }
 
@@ -283,7 +285,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-end',
-    height: 260,
+    height: 280,
+    paddingTop: 18,
   },
   barContainer: {
     alignItems: 'center',
@@ -291,15 +294,20 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   barValue: {
-    fontSize: 10,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
-    marginBottom: 4,
+    textAlign: 'center',
   },
   barWrapper: {
+    position: 'relative',
     justifyContent: 'flex-end',
     alignItems: 'center',
     height: 200,
+    overflow: 'visible',
   },
   bar: {
     width: 30,

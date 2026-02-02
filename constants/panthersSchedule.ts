@@ -79,15 +79,9 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     time: '7:00 PM ET',
     ticketStatus: 'Available',
     isPaid: false,
-<<<<<<< HEAD
-    type: 'Preseason',
-    gameNumber: 'PS 2',
-    dateTimeISO: '2025-10-07T23:00:00Z'
-=======
     type: 'Regular',
     gameNumber: '1',
     dateTimeISO: '2025-10-07T21:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '2',
@@ -339,11 +333,7 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     isPaid: false,
     type: 'Regular',
     gameNumber: '19',
-<<<<<<< HEAD
-    dateTimeISO: '2025-12-18T00:00:00Z'
-=======
     dateTimeISO: '2025-12-18T00:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '20',
@@ -357,11 +347,7 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     isPaid: false,
     type: 'Regular',
     gameNumber: '20',
-<<<<<<< HEAD
-    dateTimeISO: '2025-12-20T00:00:00Z'
-=======
     dateTimeISO: '2025-12-20T00:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '21',
@@ -375,11 +361,7 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     isPaid: false,
     type: 'Regular',
     gameNumber: '21',
-<<<<<<< HEAD
-    dateTimeISO: '2025-12-20T23:00:00Z'
-=======
     dateTimeISO: '2025-12-20T23:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '22',
@@ -393,11 +375,7 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     isPaid: false,
     type: 'Regular',
     gameNumber: '22',
-<<<<<<< HEAD
-    dateTimeISO: '2025-12-28T00:00:00Z'
-=======
     dateTimeISO: '2025-12-28T00:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '23',
@@ -411,11 +389,7 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     isPaid: false,
     type: 'Regular',
     gameNumber: '23',
-<<<<<<< HEAD
-    dateTimeISO: '2025-12-30T00:00:00Z'
-=======
     dateTimeISO: '2025-12-30T00:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '24',
@@ -429,33 +403,11 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     isPaid: false,
     type: 'Regular',
     gameNumber: '24',
-<<<<<<< HEAD
-    dateTimeISO: '2025-12-31T00:00:00Z'
-  },
-  {
-    id: '25',
-    date: 'Jan 02, 2026',
-    month: 'Jan',
-    day: '02',
-    opponent: 'vs New York Rangers',
-    opponentLogo: getOpponentLogo('vs New York Rangers'),
-    time: '7:00 PM ET',
-    ticketStatus: 'Available',
-    isPaid: false,
-    type: 'Regular',
-    gameNumber: '25',
-    dateTimeISO: '2026-01-03T01:00:00Z'
-  },
-  {
-    id: '26',
-    date: 'Jan 06, 2026',
-=======
     dateTimeISO: '2025-12-31T00:00:00Z',
   },
   {
     id: '25',
     date: 'Jan 04, 2026',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     month: 'Jan',
     day: '06',
     opponent: 'vs Colorado Avalanche',
@@ -464,21 +416,12 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     ticketStatus: 'Available',
     isPaid: false,
     type: 'Regular',
-<<<<<<< HEAD
-    gameNumber: '26',
-    dateTimeISO: '2026-01-04T22:00:00Z'
-  },
-  {
-    id: '27',
-    date: 'Jan 13, 2026',
-=======
     gameNumber: '25',
     dateTimeISO: '2026-01-04T22:00:00Z',
   },
   {
     id: '26',
     date: 'Jan 19, 2026',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     month: 'Jan',
     day: '13',
     opponent: 'vs San Jose Sharks',
@@ -487,18 +430,6 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     ticketStatus: 'Available',
     isPaid: false,
     type: 'Regular',
-<<<<<<< HEAD
-    gameNumber: '27',
-    dateTimeISO: '2026-01-20T00:00:00Z'
-  },
-  {
-    id: '28',
-    date: 'Jan 17, 2026',
-    month: 'Jan',
-    day: '17',
-    opponent: 'vs Utah Hockey Club',
-    opponentLogo: getOpponentLogo('vs Utah Hockey Club'),
-=======
     gameNumber: '26',
     dateTimeISO: '2026-01-20T00:00:00Z',
   },
@@ -509,26 +440,16 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     day: '27',
     opponent: 'vs Utah Mammoth',
     opponentLogo: getOpponentLogo('vs Utah Mammoth'),
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     time: '7:00 PM ET',
     ticketStatus: 'Available',
     isPaid: false,
     type: 'Regular',
-<<<<<<< HEAD
-    gameNumber: '28',
-    dateTimeISO: '2026-01-28T00:00:00Z'
-  },
-  {
-    id: '29',
-    date: 'Jan 20, 2026',
-=======
     gameNumber: '27',
     dateTimeISO: '2026-01-28T00:00:00Z',
   },
   {
     id: '28',
     date: 'Jan 31, 2026',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     month: 'Jan',
     day: '20',
     opponent: 'vs Winnipeg Jets',
@@ -537,19 +458,11 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     ticketStatus: 'Available',
     isPaid: false,
     type: 'Regular',
-<<<<<<< HEAD
-    gameNumber: '29',
-    dateTimeISO: '2026-01-31T21:00:00Z'
-  },
-  {
-    id: '30',
-=======
     gameNumber: '28',
     dateTimeISO: '2026-01-31T21:00:00Z',
   },
   {
     id: '29',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     date: 'Feb 02, 2026',
     month: 'Feb',
     day: '02',
@@ -559,16 +472,6 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     ticketStatus: 'Available',
     isPaid: false,
     type: 'Regular',
-<<<<<<< HEAD
-    gameNumber: '30',
-    dateTimeISO: '2026-02-03T00:00:00Z'
-  },
-  {
-    id: '31',
-    date: 'Jan 31, 2026',
-    month: 'Jan',
-    day: '31',
-=======
     gameNumber: '29',
     dateTimeISO: '2026-02-03T00:00:00Z',
   },
@@ -577,20 +480,14 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     date: 'Feb 04, 2026',
     month: 'Feb',
     day: '04',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     opponent: 'vs Boston Bruins',
     opponentLogo: getOpponentLogo('vs Boston Bruins'),
     time: '7:00 PM ET',
     ticketStatus: 'Available',
     isPaid: false,
     type: 'Regular',
-<<<<<<< HEAD
-    gameNumber: '31',
-    dateTimeISO: '2026-02-05T00:00:00Z'
-=======
     gameNumber: '30',
     dateTimeISO: '2026-02-05T00:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '31',
@@ -604,11 +501,7 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     isPaid: false,
     type: 'Regular',
     gameNumber: '31',
-<<<<<<< HEAD
-    dateTimeISO: '2026-02-27T00:00:00Z'
-=======
     dateTimeISO: '2026-02-27T00:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '32',
@@ -622,11 +515,7 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     isPaid: false,
     type: 'Regular',
     gameNumber: '32',
-<<<<<<< HEAD
-    dateTimeISO: '2026-02-28T00:00:00Z'
-=======
     dateTimeISO: '2026-02-28T00:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '33',
@@ -640,11 +529,7 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     isPaid: false,
     type: 'Regular',
     gameNumber: '33',
-<<<<<<< HEAD
-    dateTimeISO: '2026-03-11T00:00:00Z'
-=======
     dateTimeISO: '2026-03-11T00:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '34',
@@ -658,11 +543,7 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     isPaid: false,
     type: 'Regular',
     gameNumber: '34',
-<<<<<<< HEAD
-    dateTimeISO: '2026-03-13T00:00:00Z'
-=======
     dateTimeISO: '2026-03-13T00:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '35',
@@ -676,11 +557,7 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     isPaid: false,
     type: 'Regular',
     gameNumber: '35',
-<<<<<<< HEAD
-    dateTimeISO: '2026-03-24T23:00:00Z'
-=======
     dateTimeISO: '2026-03-24T23:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '36',
@@ -694,11 +571,7 @@ export const PANTHERS_20252026_SCHEDULE: Game[] = [
     isPaid: false,
     type: 'Regular',
     gameNumber: '36',
-<<<<<<< HEAD
-    dateTimeISO: '2026-03-26T23:00:00Z'
-=======
     dateTimeISO: '2026-03-26T23:00:00Z',
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   {
     id: '37',

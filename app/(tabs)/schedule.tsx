@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity, Modal,
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Search, X, Check, DollarSign } from "lucide-react-native";
 import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import * as Haptics from 'expo-haptics';
 
@@ -9,12 +10,46 @@ import { AppColors } from "@/constants/appColors";
 import { useSeasonPass } from "@/providers/SeasonPassProvider";
 import { Game, SaleRecord, SeatPair } from "@/constants/types";
 import { parseSeatsCount } from '@/lib/seats';
-<<<<<<< HEAD
 import { refreshOnLoad } from "@/lib/syncGuard";
-
-=======
 import { NHL_TEAMS } from "@/constants/leagues";
 import AppFooter from "@/components/AppFooter";
+
+function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+  const normalized = hex.replace('#', '').trim();
+  const isShort = normalized.length === 3;
+  const isLong = normalized.length === 6;
+  if (!isShort && !isLong) return null;
+
+  const full = isShort
+    ? normalized.split('').map(c => c + c).join('')
+    : normalized;
+
+  const int = parseInt(full, 16);
+  if (Number.isNaN(int)) return null;
+  return {
+    r: (int >> 16) & 255,
+    g: (int >> 8) & 255,
+    b: int & 255,
+  };
+}
+
+function darkenHex(hex: string, amount: number): string {
+  const rgb = hexToRgb(hex);
+  if (!rgb) return hex;
+  const clamp = (n: number) => Math.max(0, Math.min(255, n));
+  const r = clamp(Math.round(rgb.r * (1 - amount)));
+  const g = clamp(Math.round(rgb.g * (1 - amount)));
+  const b = clamp(Math.round(rgb.b * (1 - amount)));
+  return `#${[r, g, b].map(v => v.toString(16).padStart(2, '0')).join('')}`;
+}
+
+
+function withAlpha(color: string, alpha: number): string {
+  const rgb = hexToRgb(color);
+  if (!rgb) return color;
+  const a = Math.max(0, Math.min(1, alpha));
+  return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${a})`;
+}
 
 const TEAM_ALIASES: Record<string, string> = {
   'blackhawks': 'chi',
@@ -137,7 +172,6 @@ function getOpponentLogo(opponentName: string, storedLogo?: string): string | un
   // Last resort: use stored logo
   return storedLogo;
 }
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
 
 interface StatusBadgeProps {
   isPaid: boolean;
@@ -293,12 +327,6 @@ export default function ScheduleScreen() {
       const isPast = gameDate < now;
       
       const pairsForGame = activeSeasonPass.salesData[game.id] || {};
-<<<<<<< HEAD
-      // Sum seatCount for ALL sales on this game (both Paid and Pending - seats are allocated regardless of payment status)
-      const ticketsSold = Object.values(pairsForGame).reduce((acc, sale) => {
-        if (!sale) return acc;
-        const sc = typeof sale.seatCount === 'number' ? sale.seatCount : parseSeatsCount(sale?.seats);
-=======
       const salesCount = Object.keys(pairsForGame).length;
       
       const ticketsSold = Object.values(pairsForGame).reduce((acc, sale) => {
@@ -306,7 +334,6 @@ export default function ScheduleScreen() {
         const sc = typeof sale.seatCount === 'number' && sale.seatCount > 0 
           ? sale.seatCount 
           : parseSeatsCount(sale?.seats) || 2;
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
         return acc + sc;
       }, 0);
       const ticketsAvailable = Math.max(0, ticketsPerGame - ticketsSold);
@@ -386,7 +413,12 @@ export default function ScheduleScreen() {
     return games;
   }, [computedGames, selectedFilter, searchQuery, activeSeasonPass]);
 
+  // Theme defaults to app colors if no pass theme is set.
   const teamPrimaryColor = activeSeasonPass?.teamPrimaryColor || AppColors.primary;
+  const teamSecondaryColor = activeSeasonPass?.teamSecondaryColor || AppColors.accent;
+  // Subtle blend using ONLY Panthers blue/red/gold.
+  const scheduleGradient = [AppColors.primary, AppColors.accent, AppColors.gold];
+  const scheduleGradientStops = [0, 0.55, 1];
 
   const openGameDetail = useCallback((game: ComputedGame) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -521,57 +553,79 @@ export default function ScheduleScreen() {
             filteredGames.map((game) => (
               <TouchableOpacity 
                 key={game.id} 
-                style={[
-                  styles.gameCard,
-                  game.isPast && styles.gameCardPast
-                ]}
                 onPress={() => openGameDetail(game)}
-                activeOpacity={0.7}
+                activeOpacity={0.88}
               >
-                <View style={[styles.dateBox, game.isPast && styles.dateBoxPast]}>
-                  <Text style={[
-                    styles.dateMonth, 
-                    { color: activeSeasonPass?.teamSecondaryColor || AppColors.gold },
-                    game.isPast && styles.textPast
-                  ]}>
-                    {game.month}
-                  </Text>
-                  <Text style={[styles.dateDay, game.isPast && styles.textPast]}>{game.day}</Text>
-                </View>
-
-                <View style={styles.gameInfo}>
-                  <View style={styles.gameHeader}>
-                    {getOpponentLogo(game.opponent, game.opponentLogo) ? (
-                      <Image
-                        source={{ uri: getOpponentLogo(game.opponent, game.opponentLogo) }}
-                        style={[styles.opponentLogo, game.isPast && styles.logoPast]}
-                        contentFit="contain"
-                        cachePolicy="memory-disk"
-                        recyclingKey={game.opponentLogo}
-                      />
-                    ) : (
-                      <View style={[styles.opponentLogo, styles.logoPlaceholder]} />
-                    )}
-                    {game.gameNumber && (
-                      <View style={[
-                        styles.gameNumberBadge, 
-                        { backgroundColor: game.isPast ? AppColors.textLight : teamPrimaryColor }
-                      ]}>
-                        <Text style={styles.gameNumberText}>#{game.gameNumber}</Text>
-                      </View>
-                    )}
+                <LinearGradient
+                  colors={scheduleGradient}
+                  locations={scheduleGradientStops}
+                  start={{ x: 0.00, y: 0.50 }}
+                  end={{ x: 1.00, y: 0.50 }}
+                  style={[styles.gameCard, game.isPast && styles.gameCardPast]}
+                >
+                  <View style={[styles.dateBlock, game.isPast ? styles.dateBlockPast : styles.dateBlockUpcoming]}>
+                    <Text style={[styles.dateMonth, game.isPast ? styles.dateMonthPast : styles.dateMonthUpcoming]}>
+                      {game.month}
+                    </Text>
+                    <Text style={[styles.dateDay, game.isPast ? styles.dateDayPast : styles.dateDayUpcoming]}>
+                      {game.day}
+                    </Text>
                   </View>
-                  <Text style={[styles.opponent, game.isPast && styles.textPast]}>{game.opponent}</Text>
-                  <Text style={[styles.gameTime, game.isPast && styles.textPast]}>{game.time}</Text>
-                  <View style={styles.ticketStatusRow}>
-                    <Text style={[styles.ticketStatus, game.isPast && styles.textPast]}>
-                      {game.ticketsAvailable === 0 
-                        ? 'No seats available' 
+
+                  <View style={styles.cardMain}>
+                    <View style={styles.cardTopRow}>
+                      <View style={[styles.logoBadge, game.isPast && styles.logoBadgePast]}>
+                        {getOpponentLogo(game.opponent, game.opponentLogo) ? (
+                          <Image
+                            source={{ uri: getOpponentLogo(game.opponent, game.opponentLogo) }}
+                            style={[styles.logoImage, game.isPast && styles.logoImagePast]}
+                            contentFit="contain"
+                            cachePolicy="memory-disk"
+                            recyclingKey={game.opponentLogo}
+                          />
+                        ) : (
+                          <View style={styles.logoPlaceholderCircle} />
+                        )}
+                      </View>
+
+                      {game.gameNumber && (
+                        <View
+                          style={[
+                            styles.gameNumberPill,
+                            {
+                              backgroundColor: game.isPast
+                                ? 'rgba(255,255,255,0.12)'
+                                : 'rgba(255,255,255,0.20)',
+                            },
+                          ]}
+                        >
+                          <Text style={[styles.gameNumberText, game.isPast ? styles.gameNumberTextPast : styles.gameNumberTextUpcoming]}>
+                            #{game.gameNumber}
+                          </Text>
+                        </View>
+                      )}
+                    </View>
+
+                    <Text
+                      style={[styles.opponent, game.isPast ? styles.opponentPast : styles.opponentUpcoming]}
+                      numberOfLines={1}
+                      ellipsizeMode="tail"
+                    >
+                      {game.opponent}
+                    </Text>
+                    <Text style={[styles.gameTime, game.isPast ? styles.timePast : styles.timeUpcoming]}>{game.time}</Text>
+
+                    <Text style={[styles.ticketStatus, game.isPast ? styles.seatsPast : styles.seatsUpcoming]}>
+                      {game.ticketsAvailable === 0
+                        ? 'No seats available'
                         : `${game.ticketsAvailable} seats available`}
                     </Text>
+                  </View>
+
+                  <View style={styles.cardRight}>
                     <StatusBadge isPaid={game.allPaid} />
                   </View>
-                </View>
+                </LinearGradient>
               </TouchableOpacity>
             ))
           )}
@@ -724,20 +778,12 @@ const styles = StyleSheet.create({
   },
   filterContent: {
     paddingHorizontal: 12,
-<<<<<<< HEAD
-    gap: 7,
-=======
     gap: 8,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   filterButton: {
     paddingHorizontal: 12,
     paddingVertical: 8,
-<<<<<<< HEAD
-    borderRadius: 18,
-=======
     borderRadius: 12,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     backgroundColor: AppColors.gray,
   },
   filterButtonActive: {
@@ -752,13 +798,8 @@ const styles = StyleSheet.create({
     color: AppColors.white,
   },
   gamesList: {
-<<<<<<< HEAD
-    padding: 12,
-    gap: 8,
-=======
     padding: 10,
     gap: 12,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   emptyCard: {
     backgroundColor: AppColors.white,
@@ -783,147 +824,174 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   gameCard: {
-    backgroundColor: AppColors.white,
-<<<<<<< HEAD
-    borderRadius: 12,
-    padding: 11,
+    borderRadius: 18,
+    paddingVertical: 14,
+    paddingHorizontal: 14,
     flexDirection: 'row',
-    gap: 11,
-=======
-    borderRadius: 14,
-    padding: 14,
-    flexDirection: 'row',
+    alignItems: 'center',
     gap: 12,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.08,
-    shadowRadius: 3,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.18,
+    shadowRadius: 14,
+    elevation: 4,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.18)',
+    overflow: 'hidden',
   },
-  dateBox: {
-<<<<<<< HEAD
-    width: 52,
-    height: 52,
-    backgroundColor: AppColors.gray,
-    borderRadius: 8,
-=======
-    width: 54,
-    height: 54,
-    backgroundColor: AppColors.gray,
-    borderRadius: 10,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
+  gameCardPast: {
+    opacity: 0.62,
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
+    elevation: 1,
+  },
+  dateBlock: {
+    width: 56,
+    height: 64,
+    borderRadius: 14,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  dateBlockUpcoming: {
+    backgroundColor: 'rgba(255,255,255,0.16)',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.18)',
+  },
+  dateBlockPast: {
+    backgroundColor: 'rgba(255,255,255,0.10)',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.14)',
+  },
   dateMonth: {
     fontSize: 9,
-    fontWeight: '600' as const,
-    color: AppColors.gold,
+    fontWeight: '700' as const,
+    letterSpacing: 0.2,
+  },
+  dateMonthUpcoming: {
+    color: 'rgba(255,255,255,0.80)',
+  },
+  dateMonthPast: {
+    color: 'rgba(255,255,255,0.62)',
   },
   dateDay: {
-    fontSize: 9,
-    fontWeight: '700' as const,
-    color: AppColors.textPrimary,
+    fontSize: 16,
+    fontWeight: '800' as const,
+    marginTop: 2,
   },
-  gameInfo: {
+  dateDayUpcoming: {
+    color: AppColors.white,
+  },
+  dateDayPast: {
+    color: 'rgba(255,255,255,0.78)',
+  },
+  cardMain: {
     flex: 1,
+    minWidth: 0,
   },
-  gameHeader: {
+  cardTopRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
-    marginBottom: 4,
+    gap: 10,
+    marginBottom: 6,
   },
-  opponentLogo: {
-    width: 28,
-    height: 28,
+  logoBadge: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    backgroundColor: 'rgba(255,255,255,0.18)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.18)',
   },
-  gameNumberBadge: {
-    backgroundColor: AppColors.accent,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 6,
+  logoBadgePast: {
+    backgroundColor: 'rgba(255,255,255,0.12)',
+    borderColor: 'rgba(255,255,255,0.14)',
+  },
+  logoImage: {
+    width: 22,
+    height: 22,
+  },
+  logoImagePast: {
+    opacity: 0.9,
+  },
+  logoPlaceholderCircle: {
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    backgroundColor: 'rgba(255,255,255,0.35)',
+  },
+  gameNumberPill: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 12,
   },
   gameNumberText: {
     fontSize: 9,
-    fontWeight: '700' as const,
+    fontWeight: '800' as const,
+  },
+  gameNumberTextUpcoming: {
     color: AppColors.white,
   },
+  gameNumberTextPast: {
+    color: 'rgba(255,255,255,0.72)',
+  },
   opponent: {
-<<<<<<< HEAD
-    fontSize: 10,
-=======
-    fontSize: 9,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
-    fontWeight: '700' as const,
-    color: AppColors.textPrimary,
-    marginBottom: 2,
+    fontSize: 14,
+    fontWeight: '800' as const,
+    marginBottom: 4,
+  },
+  opponentUpcoming: {
+    color: AppColors.white,
+  },
+  opponentPast: {
+    color: 'rgba(255,255,255,0.86)',
   },
   gameTime: {
-<<<<<<< HEAD
-    fontSize: 9,
-    color: AppColors.textPrimary,
-    marginBottom: 5,
-=======
-    fontSize: 9,
-    color: AppColors.textPrimary,
+    fontSize: 11,
+    fontWeight: '700' as const,
     marginBottom: 6,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
-    fontWeight: '500' as const,
   },
-  ticketStatusRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+  timeUpcoming: {
+    color: 'rgba(255,255,255,0.85)',
+  },
+  timePast: {
+    color: 'rgba(255,255,255,0.62)',
   },
   ticketStatus: {
-<<<<<<< HEAD
-    fontSize: 9,
-=======
-    fontSize: 10,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
-    color: AppColors.textPrimary,
-    fontWeight: '500' as const,
-    flex: 1,
+    fontSize: 11,
+    fontWeight: '700' as const,
+  },
+  seatsUpcoming: {
+    color: 'rgba(255,255,255,0.75)',
+  },
+  seatsPast: {
+    color: 'rgba(255,255,255,0.52)',
+  },
+  cardRight: {
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    paddingLeft: 6,
   },
   paidBadge: {
-    backgroundColor: '#00C853',
-<<<<<<< HEAD
-    paddingHorizontal: 8,
-=======
-    paddingHorizontal: 10,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
-    paddingVertical: 4,
-    borderRadius: 6,
+    backgroundColor: 'rgba(0, 200, 83, 0.95)',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 999,
     borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0.10)',
+    borderColor: 'rgba(255,255,255,0.25)',
   },
   pendingBadge: {
-    backgroundColor: '#E53935',
-<<<<<<< HEAD
-    paddingHorizontal: 8,
-=======
-    paddingHorizontal: 10,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
-    paddingVertical: 4,
-    borderRadius: 6,
-  },
-  gameCardPast: {
-    opacity: 0.985,
-  },
-  dateBoxPast: {
-    backgroundColor: '#F5F5F5',
-  },
-  textPast: {
-    color: AppColors.textLight,
-  },
-  logoPast: {
-    opacity: 0.95,
+    backgroundColor: 'rgba(229, 57, 53, 0.96)',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.25)',
   },
   badgeText: {
-    fontSize: 10,
-    fontWeight: '700' as const,
+    fontSize: 11,
+    fontWeight: '800' as const,
     color: AppColors.white,
   },
   modalContainer: {

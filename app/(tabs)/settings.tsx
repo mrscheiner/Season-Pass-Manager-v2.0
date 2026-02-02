@@ -1,10 +1,6 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, ActivityIndicator, TextInput, Modal, Switch, Share } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-<<<<<<< HEAD
-import { FileText, Shield, Mail, Folder, Trash2, Plus, Users, RefreshCw, Download, Table, RotateCcw, Upload } from "lucide-react-native";
-=======
 import { FileText, Shield, Mail, Folder, Trash2, Plus, Users, RefreshCw, Download, Table, RotateCcw, CheckCircle, AlertCircle } from "lucide-react-native";
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
 import { useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import * as Haptics from 'expo-haptics';
@@ -36,11 +32,6 @@ export default function SettingsScreen() {
     emailBackup,
   prepareBackupPackage,
     restoreAllSeasonPassData,
-<<<<<<< HEAD
-    // force-replace (overwrite) restore
-    restoreAllSeasonPassDataReplace,
-    importSchedule,
-=======
     forceReplacePanthersSales,
     replaceSalesDataFromPastedSeed,
     lastBackupTime,
@@ -48,7 +39,6 @@ export default function SettingsScreen() {
     backupError,
     backupConfirmationMessage,
     retryBackup,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   } = useSeasonPass();
   
   const [isResyncing, setIsResyncing] = useState(false);
@@ -367,33 +357,6 @@ export default function SettingsScreen() {
     );
   }, [restoreAllSeasonPassData]);
 
-<<<<<<< HEAD
-  const handleForceReplaceAllData = useCallback(async () => {
-    Alert.alert(
-      'Force Replace All Season Pass Data',
-      'This will OVERWRITE existing season pass data with the saved backup. Existing sales data will be replaced by the backup (no merging). This cannot be undone. Continue?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Replace',
-          style: 'destructive',
-          onPress: async () => {
-            setIsForceRestoring(true);
-            try {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-              const success = await restoreAllSeasonPassDataReplace();
-              if (success) {
-                try { Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success); } catch {}
-                Alert.alert('Success', 'All season pass data has been force-replaced from backup.');
-              } else {
-                Alert.alert('Error', 'Failed to force replace season pass data.');
-              }
-            } catch (error) {
-              console.error('[Settings] Force replace error:', error);
-              Alert.alert('Error', 'Failed to force replace season pass data.');
-            } finally {
-              setIsForceRestoring(false);
-=======
   const handleForceReplacePanthersSales = useCallback(async () => {
     Alert.alert(
       'Force Replace Panthers Sales Data',
@@ -419,51 +382,17 @@ export default function SettingsScreen() {
               Alert.alert('Error', 'Failed to replace Panthers sales data.');
             } finally {
               setIsForceReplacing(false);
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
             }
           },
         },
       ]
     );
-<<<<<<< HEAD
-  }, [restoreAllSeasonPassDataReplace]);
-
-  const handleImportSchedule = useCallback(async () => {
-    if (!activeSeasonPass) {
-      Alert.alert('Error', 'No active season pass selected');
-      return;
-    }
-
-    setIsImporting(true);
-    try {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-      const result = await importSchedule();
-      
-      if (result.success) {
-        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-      } else if (result.error && result.error !== 'Cancelled by user' && result.error !== 'No file selected') {
-        Alert.alert('Import Error', result.error);
-      }
-    } catch (error: any) {
-      console.error('[Settings] Import schedule error:', error);
-      Alert.alert('Import Error', error.message || 'Failed to import schedule');
-    } finally {
-      setIsImporting(false);
-    }
-  }, [importSchedule, activeSeasonPass]);
-
-  const teamPrimaryColor = activeSeasonPass?.teamPrimaryColor || AppColors.primary;
-
-  return (
-    <View style={[styles.wrapper, { backgroundColor: teamPrimaryColor }]}>
-      <SafeAreaView edges={['top']} style={styles.container}>
-        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-=======
   }, [forceReplacePanthersSales]);
 
   return (
-    <SafeAreaView edges={['top']} style={styles.container}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+    <View style={styles.wrapper}>
+      <SafeAreaView edges={['top']} style={styles.container}>
+        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Backup Status Indicator */}
         {lastBackupStatus && (
           <View style={[
@@ -507,7 +436,6 @@ export default function SettingsScreen() {
           </View>
         )}
 
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>SEASON PASSES</Text>
           <TouchableOpacity style={styles.settingCard} onPress={handleAddSeasonPass}>
@@ -709,22 +637,6 @@ export default function SettingsScreen() {
           </TouchableOpacity>
 
           <TouchableOpacity 
-<<<<<<< HEAD
-            style={[styles.settingCard, isForceRestoring && styles.settingCardDisabled]} 
-            onPress={handleForceReplaceAllData}
-            disabled={isForceRestoring}
-          >
-            <View style={[styles.iconContainer, { backgroundColor: '#FFEBEE' }]}> 
-              {isForceRestoring ? (
-                <ActivityIndicator size="small" color="#D32F2F" />
-              ) : (
-                <Trash2 size={24} color="#D32F2F" />
-              )}
-            </View>
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Force Replace All Season Pass Data</Text>
-              <Text style={styles.settingDescription}>Overwrite local data with the last backup (destructive)</Text>
-=======
             style={[styles.settingCard, isReplacingSales && styles.settingCardDisabled]} 
             onPress={() => setShowReplaceSalesModal(true)}
             disabled={isReplacingSales}
@@ -759,7 +671,6 @@ export default function SettingsScreen() {
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Force Replace Panthers Sales</Text>
               <Text style={styles.settingDescription}>Wipe & replace with canonical 90-record dataset (includes $1 sale)</Text>
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
             </View>
           </TouchableOpacity>
 
@@ -983,8 +894,8 @@ export default function SettingsScreen() {
           </View>
         </View>
       </Modal>
-      </SafeAreaView>
-    </View>
+        </SafeAreaView>
+      </View>
   );
 }
 

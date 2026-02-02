@@ -280,11 +280,7 @@ export default function DashboardScreen() {
           <View style={styles.statsGrid}>
             <View style={[styles.statCard, styles.revenueCard]}>
               <View style={styles.statIcon}>
-<<<<<<< HEAD
-                <DollarSign size={16} color={AppColors.accent} />
-=======
                 <DollarSign size={24} color={AppColors.accent} />
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
               </View>
               <Text style={styles.statLabel}>Total Revenue</Text>
               <Text style={styles.statValue}>${calculateStats.totalRevenue.toFixed(2)}</Text>
@@ -297,32 +293,20 @@ export default function DashboardScreen() {
               activeOpacity={0.7}
             >
               <View style={styles.statIcon}>
-<<<<<<< HEAD
-                <Ticket size={16} color={AppColors.gold} />
-=======
                 <Ticket size={24} color={AppColors.gold} />
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
               </View>
               <Text style={styles.statLabel}>Seats Sold</Text>
               <Text style={styles.statValue}>{calculateStats.ticketsSold}</Text>
               <Text style={styles.statSubtext}>of {calculateStats.totalTickets} total seats</Text>
               <View style={styles.viewDetailsHint}>
                 <Text style={styles.viewDetailsText}>View Details</Text>
-<<<<<<< HEAD
-                <ChevronRight size={12} color={AppColors.textLight} />
-=======
                 <ChevronRight size={16} color={AppColors.textLight} />
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
               </View>
             </TouchableOpacity>
 
             <View style={[styles.statCard, styles.avgCard]}>
               <View style={styles.statIcon}>
-<<<<<<< HEAD
-                <TrendingUp size={16} color={teamPrimaryColor} />
-=======
                 <TrendingUp size={24} color={teamPrimaryColor} />
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
               </View>
               <Text style={styles.statLabel}>Avg Price</Text>
               <Text style={styles.statValue}>${calculateStats.avgPrice.toFixed(2)}</Text>
@@ -331,11 +315,7 @@ export default function DashboardScreen() {
 
             <View style={[styles.statCard, styles.pendingCard]}>
               <View style={styles.statIcon}>
-<<<<<<< HEAD
-                <Calendar size={16} color={AppColors.gold} />
-=======
                 <Calendar size={24} color={AppColors.gold} />
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
               </View>
               <Text style={styles.statLabel}>Pending</Text>
               <Text style={styles.statValue}>{calculateStats.pendingPayments}</Text>
@@ -485,53 +465,27 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: AppColors.primary,
-<<<<<<< HEAD
-    paddingHorizontal: 12,
-    paddingTop: 8,
-    paddingBottom: 16,
-=======
     paddingHorizontal: 10,
     paddingTop: 6,
     paddingBottom: 20,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   headerInfo: {
     marginTop: 10,
   },
   teamName: {
-<<<<<<< HEAD
     fontSize: 9,
-=======
-    fontSize: 9,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.white,
     marginBottom: 3,
   },
   season: {
-<<<<<<< HEAD
     fontSize: 9,
-=======
-    fontSize: 9,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '600' as const,
     color: AppColors.gold,
   },
   statsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-<<<<<<< HEAD
-    paddingHorizontal: 8,
-    marginTop: -12,
-    gap: 6,
-  },
-  statCard: {
-    backgroundColor: AppColors.white,
-    borderRadius: 8,
-    padding: 8,
-    width: '47.5%',
-    borderLeftWidth: 2,
-=======
     paddingHorizontal: 12,
     marginTop: -14,
     gap: 10,
@@ -542,7 +496,6 @@ const styles = StyleSheet.create({
     padding: 14,
     width: '47%',
     borderLeftWidth: 4,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -562,11 +515,7 @@ const styles = StyleSheet.create({
     borderLeftColor: AppColors.gold,
   },
   statIcon: {
-<<<<<<< HEAD
-    marginBottom: 4,
-=======
     marginBottom: 6,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   statLabel: {
     fontSize: 7,
@@ -575,55 +524,32 @@ const styles = StyleSheet.create({
     fontWeight: '500' as const,
   },
   statValue: {
-<<<<<<< HEAD
     fontSize: 9,
-=======
-    fontSize: 9,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
     marginBottom: 1,
   },
   statSubtext: {
-<<<<<<< HEAD
-    fontSize: 7,
-=======
     fontSize: 9,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     color: AppColors.textLight,
     fontWeight: '500' as const,
   },
   recentSection: {
-<<<<<<< HEAD
-    padding: 12,
-=======
     padding: 14,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   recentHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-<<<<<<< HEAD
-    marginBottom: 10,
-  },
-  recentTitle: {
-    fontSize: 9,
-=======
     marginBottom: 12,
   },
   recentTitle: {
     fontSize: 10,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
   viewAll: {
-<<<<<<< HEAD
     fontSize: 9,
-=======
-    fontSize: 9,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.accent,
   },
@@ -651,15 +577,9 @@ const styles = StyleSheet.create({
   },
   saleCard: {
     backgroundColor: AppColors.white,
-<<<<<<< HEAD
-    borderRadius: 10,
-    padding: 10,
-    marginBottom: 8,
-=======
     borderRadius: 12,
     padding: 14,
     marginBottom: 10,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.08,
@@ -672,11 +592,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   gameNumber: {
-<<<<<<< HEAD
-    fontSize: 9,
-=======
     fontSize: 10,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.accent,
   },
@@ -685,19 +601,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   teamLogo: {
-<<<<<<< HEAD
-    width: 40,
-    height: 40,
-    marginRight: 10,
-    borderRadius: 6,
-  },
-  logoPlaceholder: {
-    backgroundColor: AppColors.gray,
-    width: 40,
-    height: 40,
-    borderRadius: 6,
-    marginRight: 10,
-=======
     width: 44,
     height: 44,
     marginRight: 12,
@@ -708,21 +611,11 @@ const styles = StyleSheet.create({
     height: 44,
     borderRadius: 8,
     marginRight: 12,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   saleDetails: {
     flex: 1,
   },
   opponent: {
-<<<<<<< HEAD
-    fontSize: 10,
-    fontWeight: '700' as const,
-    color: AppColors.textPrimary,
-    marginBottom: 3,
-  },
-  seatInfo: {
-    fontSize: 9,
-=======
     fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
@@ -730,7 +623,6 @@ const styles = StyleSheet.create({
   },
   seatInfo: {
     fontSize: 10,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     color: AppColors.textSecondary,
     marginBottom: 2,
     fontWeight: '500' as const,
@@ -744,16 +636,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   price: {
-<<<<<<< HEAD
-    fontSize: 9,
-    fontWeight: '700' as const,
-    color: AppColors.accent,
-    marginBottom: 5,
-  },
-  statusBadge: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-=======
     fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.accent,
@@ -762,7 +644,6 @@ const styles = StyleSheet.create({
   statusBadge: {
     paddingHorizontal: 8,
     paddingVertical: 4,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     borderRadius: 6,
   },
   pendingBadge: {
@@ -772,11 +653,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.success,
   },
   statusText: {
-<<<<<<< HEAD
-    fontSize: 10,
-=======
     fontSize: 9,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.white,
   },
@@ -870,20 +747,12 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   modalGameOpponent: {
-<<<<<<< HEAD
-    fontSize: 10,
-=======
     fontSize: 9,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
   modalGameDate: {
-<<<<<<< HEAD
     fontSize: 9,
-=======
-    fontSize: 9,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     color: AppColors.textSecondary,
     marginTop: 2,
   },
@@ -891,11 +760,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   modalGroupPrice: {
-<<<<<<< HEAD
-    fontSize: 9,
-=======
     fontSize: 10,
->>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
   },
   modalGroupCount: {
