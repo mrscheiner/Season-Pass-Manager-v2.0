@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.background,
   },
   title: {
-    fontSize: 20,
+    fontSize: 9,
     fontWeight: "bold",
     color: AppColors.textPrimary,
   },
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   linkText: {
-    fontSize: 14,
+    fontSize: 9,
     color: AppColors.accent,
   },
 });

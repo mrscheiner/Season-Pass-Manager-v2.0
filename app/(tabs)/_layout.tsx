@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     borderBottomColor: AppColors.border,
   },
   webBannerText: {
-    fontSize: 13,
+    fontSize: 10,
     color: '#664E14',
     textAlign: 'center',
   },
@@ -208,12 +208,12 @@ const styles = StyleSheet.create({
     zIndex: 9999,
   },
   backupToastText: {
-    fontSize: 14,
+    fontSize: 9,
     fontWeight: '600' as const,
     color: '#FFFFFF',
   },
   backupToastTime: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '500' as const,
     color: 'rgba(255, 255, 255, 0.85)',
   },

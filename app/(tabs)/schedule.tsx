@@ -715,7 +715,7 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 9,
     color: AppColors.textPrimary,
   },
   filterContainer: {
@@ -744,7 +744,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.accent,
   },
   filterText: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '600' as const,
     color: AppColors.textSecondary,
   },
@@ -772,13 +772,13 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   emptyText: {
-    fontSize: 15,
+    fontSize: 9,
     fontWeight: '600' as const,
     color: AppColors.textPrimary,
     marginBottom: 6,
   },
   emptySubtext: {
-    fontSize: 12,
+    fontSize: 9,
     color: AppColors.textSecondary,
     textAlign: 'center',
   },
@@ -817,12 +817,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   dateMonth: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '600' as const,
     color: AppColors.gold,
   },
   dateDay: {
-    fontSize: 20,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
@@ -846,15 +846,15 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   gameNumberText: {
-    fontSize: 11,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.white,
   },
   opponent: {
 <<<<<<< HEAD
-    fontSize: 13,
+    fontSize: 10,
 =======
-    fontSize: 15,
+    fontSize: 9,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
@@ -862,11 +862,11 @@ const styles = StyleSheet.create({
   },
   gameTime: {
 <<<<<<< HEAD
-    fontSize: 11,
+    fontSize: 9,
     color: AppColors.textPrimary,
     marginBottom: 5,
 =======
-    fontSize: 14,
+    fontSize: 9,
     color: AppColors.textPrimary,
     marginBottom: 6,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
@@ -879,9 +879,9 @@ const styles = StyleSheet.create({
   },
   ticketStatus: {
 <<<<<<< HEAD
-    fontSize: 12,
+    fontSize: 9,
 =======
-    fontSize: 13,
+    fontSize: 10,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     color: AppColors.textPrimary,
     fontWeight: '500' as const,
@@ -947,7 +947,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   modalTitle: {
-    fontSize: 16,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
@@ -984,13 +984,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   modalOpponent: {
-    fontSize: 17,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
     marginBottom: 3,
   },
   modalDate: {
-    fontSize: 14,
+    fontSize: 9,
     color: AppColors.textSecondary,
     marginBottom: 6,
   },
@@ -1001,7 +1001,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   modalGameBadgeText: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.white,
   },
@@ -1009,7 +1009,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   sectionTitle: {
-    fontSize: 15,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
     marginBottom: 3,
@@ -1031,7 +1031,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   seatPairLabel: {
-    fontSize: 13,
+    fontSize: 10,
     fontWeight: '600' as const,
     color: AppColors.textPrimary,
     flex: 1,
@@ -1048,7 +1048,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E53935',
   },
   statusToggleText: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.white,
   },
@@ -1069,7 +1069,7 @@ const styles = StyleSheet.create({
   },
   priceInput: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 9,
     color: AppColors.textPrimary,
   },
   saveBtn: {
@@ -1080,7 +1080,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   lastSavedText: {
-    fontSize: 12,
+    fontSize: 9,
     color: AppColors.textLight,
     marginTop: 8,
   },

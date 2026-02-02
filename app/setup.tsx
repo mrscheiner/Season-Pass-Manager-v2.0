@@ -485,7 +485,7 @@ const styles = StyleSheet.create({
   },
   backText: {
     color: AppColors.white,
-    fontSize: 16,
+    fontSize: 9,
     fontWeight: '600',
     marginLeft: 4,
   },
@@ -499,13 +499,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   stepTitle: {
-    fontSize: 28,
+    fontSize: 10,
     fontWeight: '700',
     color: AppColors.textPrimary,
     marginBottom: 8,
   },
   stepSubtitle: {
-    fontSize: 16,
+    fontSize: 9,
     color: AppColors.textSecondary,
     marginBottom: 24,
     fontWeight: '500',
@@ -545,7 +545,7 @@ const styles = StyleSheet.create({
     height: 120,
   },
   leagueName: {
-    fontSize: 18,
+    fontSize: 10,
     fontWeight: '700',
     color: AppColors.textPrimary,
   },
@@ -577,7 +577,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   teamName: {
-    fontSize: 11,
+    fontSize: 9,
     fontWeight: '600',
     color: AppColors.textPrimary,
     textAlign: 'center',
@@ -589,7 +589,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.white,
     borderRadius: 12,
     padding: 16,
-    fontSize: 18,
+    fontSize: 10,
     color: AppColors.textPrimary,
     fontWeight: '600',
     borderWidth: 1,
@@ -606,7 +606,7 @@ const styles = StyleSheet.create({
   },
   nextButtonText: {
     color: AppColors.white,
-    fontSize: 18,
+    fontSize: 10,
     fontWeight: '700',
   },
   seatInputs: {
@@ -624,7 +624,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   inputLabel: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '600',
     color: AppColors.textSecondary,
     marginBottom: 6,
@@ -633,7 +633,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.gray,
     borderRadius: 10,
     padding: 12,
-    fontSize: 16,
+    fontSize: 9,
     color: AppColors.textPrimary,
     fontWeight: '600',
   },
@@ -651,7 +651,7 @@ const styles = StyleSheet.create({
   },
   addSeatButtonText: {
     color: AppColors.white,
-    fontSize: 16,
+    fontSize: 9,
     fontWeight: '700',
   },
   seatModeSelector: {
@@ -674,7 +674,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.primary,
   },
   seatModeText: {
-    fontSize: 13,
+    fontSize: 10,
     fontWeight: '600' as const,
     color: AppColors.textSecondary,
   },
@@ -688,13 +688,13 @@ const styles = StyleSheet.create({
     color: AppColors.textLight,
   },
   seatModeHint: {
-    fontSize: 12,
+    fontSize: 9,
     color: AppColors.textLight,
     marginBottom: 16,
     textAlign: 'center',
   },
   seatCountIndicator: {
-    fontSize: 11,
+    fontSize: 9,
     color: AppColors.accent,
     fontWeight: '600' as const,
     marginTop: 4,
@@ -703,7 +703,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   seatPairsTitle: {
-    fontSize: 16,
+    fontSize: 9,
     fontWeight: '700',
     color: AppColors.textPrimary,
     marginBottom: 12,
@@ -721,12 +721,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   seatPairText: {
-    fontSize: 16,
+    fontSize: 9,
     fontWeight: '600',
     color: AppColors.textPrimary,
   },
   seatPairCost: {
-    fontSize: 14,
+    fontSize: 9,
     color: AppColors.textSecondary,
     marginTop: 4,
   },
@@ -754,13 +754,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   confirmTeamName: {
-    fontSize: 22,
+    fontSize: 9,
     fontWeight: '700',
     color: AppColors.textPrimary,
     marginBottom: 4,
   },
   confirmSeason: {
-    fontSize: 16,
+    fontSize: 9,
     color: AppColors.gold,
     fontWeight: '600',
   },
@@ -770,7 +770,7 @@ const styles = StyleSheet.create({
     marginVertical: 16,
   },
   confirmSectionTitle: {
-    fontSize: 14,
+    fontSize: 9,
     fontWeight: '700',
     color: AppColors.textSecondary,
     marginBottom: 12,
@@ -784,12 +784,12 @@ const styles = StyleSheet.create({
     borderBottomColor: AppColors.gray,
   },
   confirmSeatText: {
-    fontSize: 15,
+    fontSize: 9,
     fontWeight: '600',
     color: AppColors.textPrimary,
   },
   confirmSeatCost: {
-    fontSize: 15,
+    fontSize: 9,
     fontWeight: '700',
     color: AppColors.accent,
   },
@@ -806,7 +806,7 @@ const styles = StyleSheet.create({
   },
   cancelButtonText: {
     color: AppColors.textSecondary,
-    fontSize: 16,
+    fontSize: 9,
     fontWeight: '700',
   },
   confirmButton: {
@@ -824,7 +824,7 @@ const styles = StyleSheet.create({
   },
   confirmButtonText: {
     color: AppColors.white,
-    fontSize: 16,
+    fontSize: 9,
     fontWeight: '700',
   },
 });

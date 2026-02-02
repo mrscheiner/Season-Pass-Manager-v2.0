@@ -1036,7 +1036,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   settingTitle: {
-    fontSize: 11,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
     marginBottom: 2,
@@ -1051,7 +1051,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   dangerZoneTitle: {
-    fontSize: 11,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textLight,
     marginBottom: 10,
@@ -1091,7 +1091,7 @@ const styles = StyleSheet.create({
     maxWidth: 320,
   },
   modalTitle: {
-    fontSize: 13,
+    fontSize: 10,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
     marginBottom: 7,
@@ -1108,7 +1108,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
     borderRadius: 10,
     padding: 13,
-    fontSize: 11,
+    fontSize: 9,
     color: AppColors.textPrimary,
     minHeight: 80,
     borderWidth: 1,
@@ -1127,7 +1127,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalCancelText: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '600' as const,
     color: AppColors.textSecondary,
   },
@@ -1139,7 +1139,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalRestoreText: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '600' as const,
     color: '#fff',
   },
@@ -1155,7 +1155,7 @@ const styles = StyleSheet.create({
     borderLeftColor: '#FF9800',
   },
   errorBannerText: {
-    fontSize: 11,
+    fontSize: 9,
     color: '#E65100',
     fontWeight: '500' as const,
     lineHeight: 16,
@@ -1165,7 +1165,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   versionLabel: {
-    fontSize: 11,
+    fontSize: 9,
     color: AppColors.textLight,
     textAlign: 'center',
     marginBottom: 10,
@@ -1204,7 +1204,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backupStatusTitle: {
-    fontSize: 14,
+    fontSize: 9,
     fontWeight: '600' as const,
   },
   backupStatusTitleSuccess: {
@@ -1214,12 +1214,12 @@ const styles = StyleSheet.create({
     color: '#C62828',
   },
   backupStatusTime: {
-    fontSize: 12,
+    fontSize: 9,
     color: '#558B2F',
     marginTop: 2,
   },
   backupStatusError: {
-    fontSize: 12,
+    fontSize: 9,
     color: '#C62828',
     marginTop: 2,
   },
@@ -1232,7 +1232,7 @@ const styles = StyleSheet.create({
   },
   retryButtonText: {
     color: '#C62828',
-    fontSize: 14,
+    fontSize: 9,
     fontWeight: '600' as const,
   },
   backupToast: {
@@ -1253,7 +1253,7 @@ const styles = StyleSheet.create({
   },
   backupToastText: {
     color: '#fff',
-    fontSize: 15,
+    fontSize: 9,
     fontWeight: '600' as const,
   },
 });

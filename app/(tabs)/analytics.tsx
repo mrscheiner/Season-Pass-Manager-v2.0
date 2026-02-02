@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   sectionTitle: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
     marginBottom: 10,
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   overviewValue: {
-    fontSize: 13,
+    fontSize: 10,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   seatInfo: {
-    fontSize: 11,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.primary,
     marginBottom: 6,
@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
     fontWeight: '500' as const,
   },
   trackingValue: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
@@ -390,7 +390,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   insightValue: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },

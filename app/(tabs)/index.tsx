@@ -500,9 +500,9 @@ const styles = StyleSheet.create({
   },
   teamName: {
 <<<<<<< HEAD
-    fontSize: 12,
+    fontSize: 9,
 =======
-    fontSize: 20,
+    fontSize: 9,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.white,
@@ -512,7 +512,7 @@ const styles = StyleSheet.create({
 <<<<<<< HEAD
     fontSize: 9,
 =======
-    fontSize: 14,
+    fontSize: 9,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '600' as const,
     color: AppColors.gold,
@@ -576,9 +576,9 @@ const styles = StyleSheet.create({
   },
   statValue: {
 <<<<<<< HEAD
-    fontSize: 11,
+    fontSize: 9,
 =======
-    fontSize: 20,
+    fontSize: 9,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
@@ -588,7 +588,7 @@ const styles = StyleSheet.create({
 <<<<<<< HEAD
     fontSize: 7,
 =======
-    fontSize: 11,
+    fontSize: 9,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     color: AppColors.textLight,
     fontWeight: '500' as const,
@@ -608,21 +608,21 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   recentTitle: {
-    fontSize: 12,
+    fontSize: 9,
 =======
     marginBottom: 12,
   },
   recentTitle: {
-    fontSize: 18,
+    fontSize: 10,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
   viewAll: {
 <<<<<<< HEAD
-    fontSize: 11,
+    fontSize: 9,
 =======
-    fontSize: 14,
+    fontSize: 9,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.accent,
@@ -639,13 +639,13 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   emptyText: {
-    fontSize: 14,
+    fontSize: 9,
     fontWeight: '600' as const,
     color: AppColors.textPrimary,
     marginBottom: 8,
   },
   emptySubtext: {
-    fontSize: 12,
+    fontSize: 9,
     color: AppColors.textSecondary,
     textAlign: 'center',
   },
@@ -673,9 +673,9 @@ const styles = StyleSheet.create({
   },
   gameNumber: {
 <<<<<<< HEAD
-    fontSize: 11,
+    fontSize: 9,
 =======
-    fontSize: 13,
+    fontSize: 10,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.accent,
@@ -723,13 +723,13 @@ const styles = StyleSheet.create({
   seatInfo: {
     fontSize: 9,
 =======
-    fontSize: 15,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
     marginBottom: 2,
   },
   seatInfo: {
-    fontSize: 13,
+    fontSize: 10,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     color: AppColors.textSecondary,
     marginBottom: 2,
@@ -745,7 +745,7 @@ const styles = StyleSheet.create({
   },
   price: {
 <<<<<<< HEAD
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.accent,
     marginBottom: 5,
@@ -754,7 +754,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
 =======
-    fontSize: 16,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.accent,
     marginBottom: 4,
@@ -775,7 +775,7 @@ const styles = StyleSheet.create({
 <<<<<<< HEAD
     fontSize: 10,
 =======
-    fontSize: 11,
+    fontSize: 9,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.white,
@@ -806,7 +806,7 @@ const styles = StyleSheet.create({
     borderBottomColor: AppColors.border,
   },
   modalTitle: {
-    fontSize: 17,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
@@ -851,7 +851,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   gameIndexText: {
-    fontSize: 14,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.white,
   },
@@ -864,25 +864,25 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   modalGameLabel: {
-    fontSize: 13,
+    fontSize: 10,
     fontWeight: '700' as const,
     color: AppColors.accent,
     marginBottom: 2,
   },
   modalGameOpponent: {
 <<<<<<< HEAD
-    fontSize: 13,
+    fontSize: 10,
 =======
-    fontSize: 17,
+    fontSize: 9,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
   modalGameDate: {
 <<<<<<< HEAD
-    fontSize: 11,
+    fontSize: 9,
 =======
-    fontSize: 14,
+    fontSize: 9,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     color: AppColors.textSecondary,
     marginTop: 2,
@@ -892,14 +892,14 @@ const styles = StyleSheet.create({
   },
   modalGroupPrice: {
 <<<<<<< HEAD
-    fontSize: 14,
+    fontSize: 9,
 =======
-    fontSize: 18,
+    fontSize: 10,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     fontWeight: '700' as const,
   },
   modalGroupCount: {
-    fontSize: 13,
+    fontSize: 10,
     color: AppColors.textSecondary,
     marginTop: 2,
   },
@@ -919,12 +919,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   modalSaleRowSeats: {
-    fontSize: 15,
+    fontSize: 9,
     fontWeight: '600' as const,
     color: AppColors.textPrimary,
   },
   modalSaleRowDate: {
-    fontSize: 13,
+    fontSize: 10,
     color: AppColors.textLight,
     marginTop: 2,
   },
@@ -932,7 +932,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   modalSaleRowAmount: {
-    fontSize: 16,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
     marginBottom: 4,
@@ -943,7 +943,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   miniStatusText: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.white,
   },

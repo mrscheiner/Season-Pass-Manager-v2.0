@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   headerTitle: {
-    fontSize: 17,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.white,
     marginBottom: 2,
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     fontWeight: '600' as const,
   },
   summaryValue: {
-    fontSize: 13,
+    fontSize: 10,
     fontWeight: '700' as const,
   },
   eventsSection: {
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   eventsTitle: {
-    fontSize: 13,
+    fontSize: 10,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   addButtonText: {
-    fontSize: 11,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.white,
   },
@@ -225,13 +225,13 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   emptyText: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: '600' as const,
     color: AppColors.textPrimary,
     marginBottom: 6,
   },
   emptySubtext: {
-    fontSize: 11,
+    fontSize: 9,
     color: AppColors.textSecondary,
     textAlign: 'center',
   },
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   eventName: {
-    fontSize: 13,
+    fontSize: 10,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
     fontWeight: '500' as const,
   },
   eventDetailValue: {
-    fontSize: 11,
+    fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
