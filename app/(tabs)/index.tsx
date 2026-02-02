@@ -629,7 +629,7 @@ const styles = StyleSheet.create({
   },
   emptyCard: {
     backgroundColor: AppColors.white,
-    borderRadius: 16,
+    borderRadius: 12,
     padding: 32,
     alignItems: 'center',
     shadowColor: '#000',
@@ -799,8 +799,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     backgroundColor: AppColors.white,
     borderBottomWidth: 1,
     borderBottomColor: AppColors.border,
@@ -815,11 +815,11 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     flex: 1,
-    padding: 16,
+    padding: 10,
   },
   modalEmptyCard: {
     backgroundColor: AppColors.white,
-    borderRadius: 16,
+    borderRadius: 12,
     padding: 32,
     alignItems: 'center',
     marginTop: 20,
@@ -827,7 +827,7 @@ const styles = StyleSheet.create({
   modalGameGroup: {
     backgroundColor: AppColors.white,
     borderRadius: 12,
-    marginBottom: 16,
+    marginBottom: 10,
     overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },

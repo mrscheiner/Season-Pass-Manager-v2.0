@@ -1002,7 +1002,7 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   section: {
-    marginBottom: 16,
+    marginBottom: 10,
   },
   sectionTitle: {
     fontSize: 10,
@@ -1081,7 +1081,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    padding: 12,
   },
   modalContent: {
     backgroundColor: AppColors.white,
@@ -1113,7 +1113,7 @@ const styles = StyleSheet.create({
     minHeight: 80,
     borderWidth: 1,
     borderColor: '#E0E0E0',
-    marginBottom: 16,
+    marginBottom: 10,
   },
   modalButtons: {
     flexDirection: 'row',
@@ -1179,10 +1179,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     paddingVertical: 12,
     borderRadius: 12,
-    marginBottom: 16,
+    marginBottom: 10,
   },
   backupStatusSuccess: {
     backgroundColor: '#E8F5E9',
@@ -1225,7 +1225,7 @@ const styles = StyleSheet.create({
   },
   retryButton: {
     backgroundColor: '#FFCDD2',
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 8,
     marginLeft: 12,
@@ -1243,7 +1243,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2E7D32',
     borderRadius: 12,
     paddingVertical: 14,
-    paddingHorizontal: 20,
+    paddingHorizontal: 12,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },

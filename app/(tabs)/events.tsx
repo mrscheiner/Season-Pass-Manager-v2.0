@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   emptyCard: {
     backgroundColor: AppColors.white,
     borderRadius: 14,
-    padding: 20,
+    padding: 12,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },

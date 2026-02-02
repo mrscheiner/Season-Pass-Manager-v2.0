@@ -228,13 +228,13 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    padding: 20,
+    padding: 12,
   },
   overviewCard: {
     backgroundColor: AppColors.white,
-    borderRadius: 16,
-    padding: 20,
-    marginBottom: 16,
+    borderRadius: 12,
+    padding: 12,
+    marginBottom: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
   trackingCard: {
     backgroundColor: AppColors.white,
     borderRadius: 14,
-    padding: 16,
+    padding: 10,
     marginBottom: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -356,7 +356,7 @@ const styles = StyleSheet.create({
   insightsCard: {
     backgroundColor: AppColors.white,
     borderRadius: 14,
-    padding: 16,
+    padding: 10,
     marginBottom: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

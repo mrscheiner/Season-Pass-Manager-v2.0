@@ -699,7 +699,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   searchContainer: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     paddingTop: 12,
     paddingBottom: 12,
     backgroundColor: AppColors.white,
@@ -723,7 +723,7 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   filterContent: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
 <<<<<<< HEAD
     gap: 7,
 =======
@@ -731,12 +731,12 @@ const styles = StyleSheet.create({
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   filterButton: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     paddingVertical: 8,
 <<<<<<< HEAD
     borderRadius: 18,
 =======
-    borderRadius: 16,
+    borderRadius: 12,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
     backgroundColor: AppColors.gray,
   },
@@ -756,14 +756,14 @@ const styles = StyleSheet.create({
     padding: 12,
     gap: 8,
 =======
-    padding: 16,
+    padding: 10,
     gap: 12,
 >>>>>>> 16dba40aa7b887e26e4a9827e6997c52804727ca
   },
   emptyCard: {
     backgroundColor: AppColors.white,
     borderRadius: 14,
-    padding: 26,
+    padding: 12,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -937,7 +937,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     paddingVertical: 12,
     backgroundColor: AppColors.white,
     borderBottomWidth: 1,
@@ -956,7 +956,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     flex: 1,
-    padding: 16,
+    padding: 10,
   },
   gameDetailHeader: {
     flexDirection: 'row',
@@ -964,7 +964,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.white,
     borderRadius: 14,
     padding: 13,
-    marginBottom: 16,
+    marginBottom: 10,
     gap: 13,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
