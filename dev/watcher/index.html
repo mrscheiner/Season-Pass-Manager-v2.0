@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Rork Watcher — Backups Preview</title>
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial; margin: 18px; }
+      .container { display:flex; gap:20px; }
+      .left { width:320px; }
+      .right { flex:1; }
+      canvas { background:#fff; border:1px solid #eee }
+      pre { background:#0f1720; color:#e6eef3; padding:12px; border-radius:6px; overflow:auto; max-height:600px }
+      img.iphone { max-width:300px; border:1px solid #ddd; border-radius:12px }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  </head>
+  <body>
+    <h2>Rork Watcher — Backups Preview</h2>
+    <p>Auto-updates when files in <code>dev/backups</code> change.</p>
+    <div class="container">
+      <div class="left">
+        <div>
+          <h3>Recovery QR</h3>
+          <canvas id="qr" width="256" height="256"></canvas>
+        </div>
+        <div style="margin-top:12px">
+          <h3>Rork iPhone</h3>
+          <img id="iphoneImg" class="iphone" src="/backups/rork-iphone.png" alt="rork iphone (drop dev/backups/rork-iphone.png)" />
+        </div>
+      </div>
+      <div class="right">
+        <h3>Backup JSON</h3>
+        <pre id="json">(waiting for data...)</pre>
+      </div>
+    </div>
+
+    <script>
+      const qr = new QRious({ element: document.getElementById('qr'), size: 256 });
+      const jsonEl = document.getElementById('json');
+      const iphoneImg = document.getElementById('iphoneImg');
+
+      function applyData(d) {
+        try {
+          const obj = JSON.parse(d);
+          const code = obj.code || '';
+          const json = obj.json || null;
+          // Prefer encoding a short URL to avoid raw-text scan zoom on iPhone
+          if (code) {
+            try {
+              const base = window.location.origin || (window.location.protocol + '//' + window.location.host);
+              qr.value = `${base}/restore?code=${encodeURIComponent(code)}`;
+            } catch (e) {
+              qr.value = code;
+            }
+          } else {
+            qr.value = '(no code)';
+          }
+          if (json) {
+            try { jsonEl.textContent = JSON.stringify(JSON.parse(json), null, 2); } catch (e) { jsonEl.textContent = json; }
+          } else {
+            jsonEl.textContent = '(no backup json found)';
+          }
+        } catch (e) {
+          // d may already be an object
+          const code = d.code || '';
+          const json = d.json || null;
+          if (code) {
+            try {
+              const base = window.location.origin || (window.location.protocol + '//' + window.location.host);
+              qr.value = `${base}/restore?code=${encodeURIComponent(code)}`;
+            } catch (e) {
+              qr.value = code;
+            }
+          } else {
+            qr.value = '(no code)';
+          }
+          if (json) {
+            try { jsonEl.textContent = JSON.stringify(JSON.parse(json), null, 2); } catch (e) { jsonEl.textContent = json; }
+          } else {
+            jsonEl.textContent = '(no backup json found)';
+          }
+        }
+      }
+
+      const es = new EventSource('/events');
+      es.addEventListener('update', (ev) => {
+        try { const data = JSON.parse(ev.data); applyData(data); } catch (e) { console.error(e); }
+      });
+
+      // initial fetch
+      fetch('/backups/seasonpass_restore_panthers_2025.json').then(r => r.text()).then(t => { applyData({ code: null, json: t }); }).catch(()=>{});
+      fetch('/backups/latest_recovery_code.txt').then(r => r.text()).then(t => {
+        const code = t.trim();
+        if (code) {
+          try {
+            const base = window.location.origin || (window.location.protocol + '//' + window.location.host);
+            qr.value = `${base}/restore?code=${encodeURIComponent(code)}`;
+          } catch (e) {
+            qr.value = code;
+          }
+        }
+      }).catch(()=>{});
+    </script>
+  </body>
+</html>
