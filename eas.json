@@ -12,7 +12,6 @@
     },
     "preview": {
       "distribution": "internal",
-      "installCommand": "npm install --legacy-peer-deps",
       "ios": {
         "simulator": true,
         "resourceClass": "m-medium"
