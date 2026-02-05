@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "App UI Clone Clone",
-    "slug": "app-ui-clone-clone",
+    "name": "Season Pass Manager",
+    "slug": "season-pass-manager-v2",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,14 +15,14 @@
     },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "app.rork.app-ui-clone-clone"
+      "bundleIdentifier": "com.mrscheiner.seasonpassmanager"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "app.rork.app_ui_clone_clone",
+      "package": "com.mrscheiner.seasonpassmanager",
       "permissions": [
         "android.permission.VIBRATE",
         "READ_EXTERNAL_STORAGE",

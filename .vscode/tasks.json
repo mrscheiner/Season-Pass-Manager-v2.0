@@ -1,0 +1,279 @@
+{
+	"version": "2.0.0",
+	"inputs": [
+		{
+			"id": "diffCsvA",
+			"type": "promptString",
+			"description": "Path to first SeasonPassBackup CSV (absolute or relative to workspace)",
+			"default": "${workspaceFolder}/dev/backups/SeasonPassBackup_A.csv"
+		},
+		{
+			"id": "diffCsvB",
+			"type": "promptString",
+			"description": "Path to second SeasonPassBackup CSV (absolute or relative to workspace)",
+			"default": "${workspaceFolder}/dev/backups/SeasonPassBackup_B.csv"
+		}
+	],
+	"tasks": [
+		{
+			"label": "🚀 Start Dev Servers",
+			"type": "shell",
+			"command": "npm",
+			"args": ["run", "dev"],
+			"isBackground": true,
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": true
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "🔍 Check Server Health",
+			"type": "shell",
+			"command": "npm",
+			"args": ["run", "dev:check"],
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"focus": true
+			}
+		},
+		{
+			"label": "📊 Show Server Status",
+			"type": "shell",
+			"command": "npm",
+			"args": ["run", "dev:status"],
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"focus": true
+			}
+		},
+		{
+			"label": "🔄 Restart All Servers",
+			"type": "shell",
+			"command": "npm",
+			"args": ["run", "dev:restart"],
+			"isBackground": true,
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": true
+			}
+		},
+		{
+			"label": "expo-web-clear",
+			"type": "shell",
+			"command": "npx",
+			"args": [
+				"expo",
+				"start",
+				"--web",
+				"--clear"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "expo-web-clear (restart)",
+			"type": "shell",
+			"command": "npx",
+			"args": [
+				"expo",
+				"start",
+				"--web",
+				"--clear"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "expo-web-clear (after clone-kit change)",
+			"type": "shell",
+			"command": "npx",
+			"args": [
+				"expo",
+				"start",
+				"--web",
+				"--clear"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "diff-backup-csvs",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"scripts/diff_backups.py",
+				"${input:diffCsvA}",
+				"${input:diffCsvB}"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "diff-backup-csvs (full output)",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"scripts/diff_backups.py",
+				"${input:diffCsvA}",
+				"${input:diffCsvB}"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "check-metro-ports",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"lsof -nP -iTCP:8081 -sTCP:LISTEN || true; echo '---'; lsof -nP -iTCP:8082 -sTCP:LISTEN || true"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "curl-localhost-8081",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"curl -I --max-time 3 http://localhost:8081 2>/dev/null | head -n 20 || true"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "check-8081-listener",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"lsof -nP -iTCP:8081 -sTCP:LISTEN || true"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "expo-lan-clear",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"cd \"${workspaceFolder}\" && (lsof -tiTCP:8081 -sTCP:LISTEN | xargs -r kill) && (lsof -tiTCP:8082 -sTCP:LISTEN | xargs -r kill) && (lsof -tiTCP:8083 -sTCP:LISTEN | xargs -r kill) && (lsof -tiTCP:8084 -sTCP:LISTEN | xargs -r kill) && npx expo start -c --lan"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "expo-lan-web-clear (iPhone + web)",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"cd \"${workspaceFolder}\" && (lsof -tiTCP:8081 -sTCP:LISTEN | xargs -r kill) && (lsof -tiTCP:8082 -sTCP:LISTEN | xargs -r kill) && (lsof -tiTCP:8083 -sTCP:LISTEN | xargs -r kill) && (lsof -tiTCP:8084 -sTCP:LISTEN | xargs -r kill) && npx expo start --web --clear --lan"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "expo-lan-clear (force 8082)",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"cd \"${workspaceFolder}\" && (lsof -tiTCP:8081 -sTCP:LISTEN | xargs -r kill) && (lsof -tiTCP:8082 -sTCP:LISTEN | xargs -r kill) && (lsof -tiTCP:8083 -sTCP:LISTEN | xargs -r kill) && (lsof -tiTCP:8084 -sTCP:LISTEN | xargs -r kill) && npx expo start -c --lan --port 8082"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "api-start (cloud sync 8787)",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"cd \"${workspaceFolder}\" && bun run start:api"
+			],
+			"options": {
+				"env": {
+					"SPM_SYNC_STORE_PATH": "${workspaceFolder}/dev/sync-store.json",
+					"PORT": "8787"
+				}
+			},
+			"isBackground": true,
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"clear": true,
+				"focus": false
+			},
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "api-restart (kill 8787 + start)",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"cd \"${workspaceFolder}\" && (lsof -tiTCP:8787 -sTCP:LISTEN | xargs -r kill) && bun run start:api"
+			],
+			"options": {
+				"env": {
+					"SPM_SYNC_STORE_PATH": "${workspaceFolder}/dev/sync-store.json",
+					"PORT": "8787"
+				}
+			},
+			"isBackground": true,
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"clear": true,
+				"focus": false
+			},
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "dev-start (expo lan + api)",
+			"dependsOn": [
+				"api-restart (kill 8787 + start)",
+				"expo-lan-web-clear (iPhone + web)"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "api-healthcheck (localhost:8787)",
+			"type": "shell",
+			"command": "zsh",
+			"args": [
+				"-lc",
+				"curl -sS -m 2 http://127.0.0.1:8787/ || echo API_NOT_RUNNING"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

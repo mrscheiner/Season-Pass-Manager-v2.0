@@ -2,6 +2,7 @@ import { Tabs, useRouter } from "expo-router";
 import { Home, Calendar, TrendingUp, Ticket, Settings, CheckCircle, AlertCircle } from "lucide-react-native";
 import React, { useEffect, useRef } from "react";
 import { View, ActivityIndicator, StyleSheet, Text, Platform, Animated } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 import { AppColors } from "@/constants/appColors";
 import { useSeasonPass } from "@/providers/SeasonPassProvider";
@@ -63,10 +64,22 @@ export default function TabLayout() {
         tabBarInactiveTintColor: AppColors.iconGray,
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: AppColors.white,
-          borderTopColor: AppColors.border,
-          borderTopWidth: 1,
+          backgroundColor: 'transparent',
+          borderTopWidth: 0,
+          elevation: 14,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: -8 },
+          shadowOpacity: 0.08,
+          shadowRadius: 18,
         },
+        tabBarBackground: () => (
+          <LinearGradient
+            colors={['rgba(255,255,255,0.96)', 'rgba(241,245,249,0.92)', 'rgba(255,255,255,0.96)']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={[StyleSheet.absoluteFill, { borderTopWidth: 1, borderTopColor: 'rgba(229,231,235,0.85)' }]}
+          />
+        ),
         tabBarLabelStyle: {
           fontSize: 9,
           fontWeight: '600',

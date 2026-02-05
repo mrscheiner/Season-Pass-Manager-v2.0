@@ -1,5 +1,24 @@
 # Welcome to your Rork app
 
+## ⚡ Quick Start (Development)
+
+**First time setup:**
+```bash
+npm install
+npm run dev
+```
+
+**Daily development:**
+```bash
+npm run dev:status    # Check if servers are running
+npm run dev           # Start if needed
+npm run dev:restart   # Restart everything
+```
+
+**Problems?** See [DEV_SURVIVAL_GUIDE.md](DEV_SURVIVAL_GUIDE.md) for troubleshooting.
+
+---
+
 ## Project info
 
 This is a native cross-platform mobile app created with [Rork](https://rork.com)

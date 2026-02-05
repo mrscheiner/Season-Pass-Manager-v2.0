@@ -27,6 +27,10 @@ npm-debug.*
 yarn-debug.*
 yarn-error.*
 
+# local temp files
+dev/sync-store.json
+dev/sync-store.json.tmp
+
 # macOS
 .DS_Store
 *.pem

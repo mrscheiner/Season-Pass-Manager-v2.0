@@ -14,43 +14,6 @@ import { refreshOnLoad } from "@/lib/syncGuard";
 import { NHL_TEAMS } from "@/constants/leagues";
 import AppFooter from "@/components/AppFooter";
 
-function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
-  const normalized = hex.replace('#', '').trim();
-  const isShort = normalized.length === 3;
-  const isLong = normalized.length === 6;
-  if (!isShort && !isLong) return null;
-
-  const full = isShort
-    ? normalized.split('').map(c => c + c).join('')
-    : normalized;
-
-  const int = parseInt(full, 16);
-  if (Number.isNaN(int)) return null;
-  return {
-    r: (int >> 16) & 255,
-    g: (int >> 8) & 255,
-    b: int & 255,
-  };
-}
-
-function darkenHex(hex: string, amount: number): string {
-  const rgb = hexToRgb(hex);
-  if (!rgb) return hex;
-  const clamp = (n: number) => Math.max(0, Math.min(255, n));
-  const r = clamp(Math.round(rgb.r * (1 - amount)));
-  const g = clamp(Math.round(rgb.g * (1 - amount)));
-  const b = clamp(Math.round(rgb.b * (1 - amount)));
-  return `#${[r, g, b].map(v => v.toString(16).padStart(2, '0')).join('')}`;
-}
-
-
-function withAlpha(color: string, alpha: number): string {
-  const rgb = hexToRgb(color);
-  if (!rgb) return color;
-  const a = Math.max(0, Math.min(1, alpha));
-  return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${a})`;
-}
-
 const TEAM_ALIASES: Record<string, string> = {
   'blackhawks': 'chi',
   'chicago': 'chi',
@@ -415,10 +378,10 @@ export default function ScheduleScreen() {
 
   // Theme defaults to app colors if no pass theme is set.
   const teamPrimaryColor = activeSeasonPass?.teamPrimaryColor || AppColors.primary;
-  const teamSecondaryColor = activeSeasonPass?.teamSecondaryColor || AppColors.accent;
+  // const teamSecondaryColor = activeSeasonPass?.teamSecondaryColor || AppColors.accent;
   // Subtle blend using ONLY Panthers blue/red/gold.
-  const scheduleGradient = [AppColors.primary, AppColors.accent, AppColors.gold];
-  const scheduleGradientStops = [0, 0.55, 1];
+  const scheduleGradient = [AppColors.primary, AppColors.accent, AppColors.gold] as const;
+  const scheduleGradientStops = [0, 0.55, 1] as const;
 
   const openGameDetail = useCallback((game: ComputedGame) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -448,6 +411,42 @@ export default function ScheduleScreen() {
     setEditingStatuses({});
   }, []);
 
+  const normalizeMoneyInput = useCallback((text: string) => {
+    const cleaned = text.replace(/,/g, '.').replace(/[^0-9.]/g, '');
+    const firstDot = cleaned.indexOf('.');
+    return firstDot >= 0
+      ? cleaned.slice(0, firstDot + 1) + cleaned.slice(firstDot + 1).replace(/\./g, '')
+      : cleaned;
+  }, []);
+
+  const handlePriceChange = useCallback((pair: SeatPair, text: string) => {
+    const normalized = normalizeMoneyInput(text);
+    const seatCount = parseSeatsCount(pair.seats);
+
+    setEditingPrices(prev => {
+      const prevVal = prev[pair.id] ?? '';
+
+      // iOS numeric keyboard can double-emit (e.g. "5000" -> "50005000").
+      // IMPORTANT: allow legitimate repeated digits like "99"/"44" (prevVal length 1).
+      if (prevVal.length >= 2 && normalized === prevVal + prevVal) {
+        return prev;
+      }
+
+      // Occasionally iOS emits a follow-up update that is exactly half.
+      // For typical 2-seat pairs, keep the user's full value.
+      if (seatCount === 2 && prevVal && normalized) {
+        const prevNum = Number(prevVal);
+        const nextNum = Number(normalized);
+        if (Number.isFinite(prevNum) && Number.isFinite(nextNum) && Math.abs(prevNum - nextNum * 2) < 0.005) {
+          return prev;
+        }
+      }
+
+      if (prevVal === normalized) return prev;
+      return { ...prev, [pair.id]: normalized };
+    });
+  }, [normalizeMoneyInput]);
+
   const togglePaymentStatus = useCallback((pairId: string) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     setEditingStatuses(prev => ({
@@ -459,9 +458,21 @@ export default function ScheduleScreen() {
   const saveSaleRecord = useCallback(async (pair: SeatPair) => {
     if (!activeSeasonPass || !selectedGame) return;
     
-    const priceStr = editingPrices[pair.id] || '0';
-    const price = parseFloat(priceStr) || 0;
+    const priceStrRaw = editingPrices[pair.id] ?? '';
+    const priceStr = String(priceStrRaw).trim();
+    const parsed = priceStr ? parseFloat(priceStr) : NaN;
+    const price = Number.isFinite(parsed) ? parsed : 0;
     const status = editingStatuses[pair.id] || 'Pending';
+
+    // If the user cleared the price (or it is zero), treat it as removing the sale.
+    // This prevents accidental $0.00 sales from persisting and skewing Seats Sold / Pending.
+    if (!priceStr || price <= 0) {
+      const existingSale = activeSeasonPass.salesData?.[selectedGame.id]?.[pair.id];
+      if (existingSale) {
+        await removeSaleRecord(activeSeasonPass.id, selectedGame.id, pair.id);
+      }
+      return;
+    }
     
     const saleRecord: SaleRecord = {
       id: `${selectedGame.id}_${pair.id}`,
@@ -479,22 +490,28 @@ export default function ScheduleScreen() {
     await addSaleRecord(activeSeasonPass.id, selectedGame.id, saleRecord);
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     console.log('[Schedule] Saved sale record:', saleRecord);
-  }, [activeSeasonPass, selectedGame, editingPrices, editingStatuses, addSaleRecord]);
+  }, [activeSeasonPass, selectedGame, editingPrices, editingStatuses, addSaleRecord, removeSaleRecord]);
 
   const saveAllAndClose = useCallback(async () => {
     if (!activeSeasonPass || !selectedGame) return;
     
     for (const pair of activeSeasonPass.seatPairs) {
       const priceStr = editingPrices[pair.id];
-      if (priceStr !== undefined && priceStr !== '') {
-        await saveSaleRecord(pair);
-      } else if (priceStr === '') {
-        // If user cleared the price for an existing sale, remove that sale record
+      if (priceStr === undefined) continue;
+
+      const trimmed = String(priceStr).trim();
+      const parsed = trimmed ? parseFloat(trimmed) : NaN;
+      const price = Number.isFinite(parsed) ? parsed : 0;
+
+      if (!trimmed || price <= 0) {
         const existingSale = activeSeasonPass.salesData?.[selectedGame.id]?.[pair.id];
         if (existingSale) {
           await removeSaleRecord(activeSeasonPass.id, selectedGame.id, pair.id);
         }
+        continue;
       }
+
+      await saveSaleRecord(pair);
     }
     
     closeGameDetail();
@@ -642,6 +659,7 @@ export default function ScheduleScreen() {
       >
         <KeyboardAvoidingView 
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
           style={styles.modalContainer}
         >
           <SafeAreaView style={styles.modalSafeArea}>
@@ -656,7 +674,17 @@ export default function ScheduleScreen() {
             </View>
 
             {selectedGame && (
-              <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
+              <ScrollView
+                style={styles.modalContent}
+                contentContainerStyle={[
+                  styles.modalContentContainer,
+                  { paddingBottom: Platform.OS === 'ios' ? 280 : 220 },
+                ]}
+                showsVerticalScrollIndicator={false}
+                keyboardShouldPersistTaps="handled"
+                keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}
+                automaticallyAdjustKeyboardInsets
+              >
                 <View style={styles.gameDetailHeader}>
                   {getOpponentLogo(selectedGame.opponent, selectedGame.opponentLogo) ? (
                     <Image
@@ -710,7 +738,7 @@ export default function ScheduleScreen() {
                               placeholderTextColor={AppColors.textLight}
                               keyboardType="decimal-pad"
                               value={editingPrices[pair.id] || ''}
-                              onChangeText={(text) => setEditingPrices(prev => ({ ...prev, [pair.id]: text }))}
+                              onChangeText={(text) => handlePriceChange(pair, text)}
                             />
                           </View>
                           <TouchableOpacity
@@ -1025,6 +1053,9 @@ const styles = StyleSheet.create({
   modalContent: {
     flex: 1,
     padding: 10,
+  },
+  modalContentContainer: {
+    paddingTop: 0,
   },
   gameDetailHeader: {
     flexDirection: 'row',

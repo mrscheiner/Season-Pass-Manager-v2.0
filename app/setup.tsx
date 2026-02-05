@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView, Platform, Keyboard, InputAccessoryView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
@@ -41,6 +41,43 @@ export default function SetupScreen() {
     }
     return parts.filter(p => !isNaN(parseInt(p, 10))).length;
   }, [currentSeats]);
+
+  const costAccessoryId = Platform.OS === 'ios' ? 'setup.costAccessory' : undefined;
+
+  const handleCostChange = useCallback((text: string) => {
+    // iOS numeric keyboard occasionally double-emits the same value (e.g. "5000" -> "50005000").
+    // Keep the input stable while typing by sanitizing and ignoring the common double-echo pattern.
+    let cleaned = text.replace(/,/g, '.').replace(/[^0-9.]/g, '');
+
+    // If the entire string is exactly repeated twice (including decimals), collapse it.
+    // This avoids relying on the previous React state value, which can be stale under rapid iOS events.
+    if (cleaned.length >= 6 && cleaned.length % 2 === 0) {
+      const half = cleaned.length / 2;
+      if (cleaned.slice(0, half) === cleaned.slice(half)) {
+        cleaned = cleaned.slice(0, half);
+      }
+    }
+
+    const firstDot = cleaned.indexOf('.');
+    const normalized = firstDot >= 0
+      ? cleaned.slice(0, firstDot + 1) + cleaned.slice(firstDot + 1).replace(/\./g, '')
+      : cleaned;
+
+    setCurrentCost(prev => {
+      // Guard: sometimes iOS emits an immediate follow-up update that is exactly half.
+      // This app stores seasonCost as the TOTAL for the seat entry, so keep the user's full value.
+      if (parsedSeatCount === 2 && prev && normalized) {
+        const prevNum = Number(prev);
+        const nextNum = Number(normalized);
+        if (Number.isFinite(prevNum) && Number.isFinite(nextNum) && Math.abs(prevNum - nextNum * 2) < 0.005) {
+          return prev;
+        }
+      }
+
+      if (prev === normalized) return prev;
+      return normalized;
+    });
+  }, [parsedSeatCount]);
 
   // Auto-switch to Individual mode when >2 seats are entered
   const isModeLockedToIndividual = parsedSeatCount > 2;
@@ -346,10 +383,13 @@ export default function SetupScreen() {
             <TextInput
               style={styles.smallInput}
               value={currentCost}
-              onChangeText={setCurrentCost}
+              onChangeText={handleCostChange}
               placeholder="5000"
               placeholderTextColor={AppColors.textLight}
-              keyboardType="numeric"
+              keyboardType="decimal-pad"
+              autoCorrect={false}
+              spellCheck={false}
+              inputAccessoryViewID={costAccessoryId}
             />
           </View>
         </View>
@@ -455,13 +495,36 @@ export default function SetupScreen() {
           </TouchableOpacity>
         )}
 
-        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-          {step === 'league' && renderLeagueStep()}
-          {step === 'team' && renderTeamStep()}
-          {step === 'season' && renderSeasonStep()}
-          {step === 'seats' && renderSeatsStep()}
-          {step === 'confirm' && renderConfirmStep()}
-        </ScrollView>
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
+        >
+          <ScrollView
+            style={styles.scrollView}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.scrollContent}
+            keyboardShouldPersistTaps="handled"
+            keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}
+          >
+            {step === 'league' && renderLeagueStep()}
+            {step === 'team' && renderTeamStep()}
+            {step === 'season' && renderSeasonStep()}
+            {step === 'seats' && renderSeatsStep()}
+            {step === 'confirm' && renderConfirmStep()}
+          </ScrollView>
+        </KeyboardAvoidingView>
+
+        {Platform.OS === 'ios' && costAccessoryId && (
+          <InputAccessoryView nativeID={costAccessoryId}>
+            <View style={styles.inputAccessory}>
+              <View style={{ flex: 1 }} />
+              <TouchableOpacity onPress={() => Keyboard.dismiss()} style={styles.doneButton}>
+                <Text style={styles.doneButtonText}>Done</Text>
+              </TouchableOpacity>
+            </View>
+          </InputAccessoryView>
+        )}
       </SafeAreaView>
     </View>
   );
@@ -494,6 +557,26 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingBottom: 40,
+  },
+  inputAccessory: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    backgroundColor: '#F3F4F6',
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
+  },
+  doneButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    backgroundColor: AppColors.primary,
+    borderRadius: 8,
+  },
+  doneButtonText: {
+    color: AppColors.white,
+    fontSize: 12,
+    fontWeight: '700',
   },
   stepContainer: {
     padding: 20,

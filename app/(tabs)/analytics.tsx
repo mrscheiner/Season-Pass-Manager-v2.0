@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DollarSign, Calendar, Percent, TrendingUp, Clock } from "lucide-react-native";
 import { useMemo } from "react";
@@ -8,7 +8,31 @@ import { useSeasonPass } from "@/providers/SeasonPassProvider";
 import AppFooter from "@/components/AppFooter";
 
 export default function AnalyticsScreen() {
-  const { activeSeasonPass, calculateStats } = useSeasonPass();
+  const { activeSeasonPass, activeSeasonPassId, calculateStats } = useSeasonPass();
+
+  const coercePrice = (value: unknown): number => {
+    const num = typeof value === "number" ? value : Number(value);
+    return Number.isFinite(num) ? num : 0;
+  };
+
+  const dataSignature = useMemo(() => {
+    if (!activeSeasonPass) return null;
+    const gamesCount = activeSeasonPass.games?.length ?? 0;
+    const seatPairsCount = activeSeasonPass.seatPairs?.length ?? 0;
+    let saleRecordsCount = 0;
+    let nonFinitePriceCount = 0;
+    Object.values(activeSeasonPass.salesData || {}).forEach(gameSales => {
+      const entries = Object.values(gameSales || {});
+      saleRecordsCount += entries.length;
+      entries.forEach(sale => {
+        const raw = (sale as any)?.price;
+        const num = typeof raw === "number" ? raw : Number(raw);
+        if (!Number.isFinite(num)) nonFinitePriceCount += 1;
+      });
+    });
+    const shortId = (activeSeasonPassId || activeSeasonPass.id || "").slice(0, 8);
+    return `pass:${shortId} games:${gamesCount} pairs:${seatPairsCount} saleRecords:${saleRecordsCount} badPrices:${nonFinitePriceCount} (${Platform.OS})`;
+  }, [activeSeasonPass, activeSeasonPassId]);
 
   const monthlyRevenue = useMemo(() => {
     const monthOrder = ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'];
@@ -23,11 +47,11 @@ export default function AnalyticsScreen() {
 
     Object.values(activeSeasonPass.salesData).forEach(gameSales => {
       Object.values(gameSales).forEach(sale => {
-        if (sale.soldDate && typeof sale.price === 'number') {
+        if (sale.soldDate) {
           const soldDate = new Date(sale.soldDate);
           const monthKey = monthNames[soldDate.getMonth()];
           if (monthMap[monthKey] !== undefined) {
-            monthMap[monthKey] += sale.price;
+            monthMap[monthKey] += coercePrice((sale as any).price);
           }
         }
       });
@@ -46,8 +70,9 @@ export default function AnalyticsScreen() {
 
       Object.values(activeSeasonPass.salesData).forEach(gameSales => {
         const sale = gameSales[pair.id];
-        if (sale && typeof sale.price === 'number') {
-          revenue += sale.price;
+        if (sale) {
+          const p = coercePrice((sale as any).price);
+          if (p > 0) revenue += p;
           soldCount += 1;
           const sc = typeof sale.seatCount === 'number' ? sale.seatCount : (sale?.seats ? parseInt(String(sale.seats).split(/[^0-9]+/).filter(Boolean)[0] || '1', 10) : 1);
           soldSeats += sc || 0;
@@ -96,40 +121,49 @@ export default function AnalyticsScreen() {
               <Text style={styles.overviewLabel}>Sold Rate</Text>
             </View>
           </View>
+          {__DEV__ && dataSignature && (
+            <Text style={styles.debugText}>{dataSignature}</Text>
+          )}
         </View>
 
         <View style={styles.chartCard}>
           <Text style={styles.sectionTitle}>Monthly Revenue</Text>
           <View style={styles.chart}>
-            <View style={styles.chartBars}>
-              {monthlyRevenue.map((item, index) => {
-                const height = item.revenue > 0 ? (item.revenue / maxRevenue) * 200 : 4;
-                return (
-                  <View key={index} style={styles.barContainer}>
-                    <View style={styles.barWrapper}>
-                      {item.revenue > 0 && (
-                        <Text
-                          style={[styles.barValue, { bottom: height + 6 }]}
-                          numberOfLines={1}
-                          ellipsizeMode="clip"
-                          adjustsFontSizeToFit
-                          minimumFontScale={0.7}
-                        >
-                          ${item.revenue.toFixed(0)}
-                        </Text>
-                      )}
-                      <View 
-                        style={[
-                          styles.bar, 
-                          { height, backgroundColor: item.revenue > 0 ? teamPrimaryColor : AppColors.border },
-                        ]} 
-                      />
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.chartScrollContent}
+            >
+              <View style={styles.chartBars}>
+                {monthlyRevenue.map((item, index) => {
+                  const height = item.revenue > 0 ? (item.revenue / maxRevenue) * 200 : 4;
+                  return (
+                    <View key={index} style={styles.barContainer}>
+                      <View style={styles.barWrapper}>
+                        {item.revenue > 0 && (
+                          <Text
+                            style={[styles.barValue, { bottom: height + 6 }]}
+                            numberOfLines={1}
+                            ellipsizeMode="clip"
+                            adjustsFontSizeToFit
+                            minimumFontScale={0.5}
+                          >
+                            ${item.revenue.toFixed(0)}
+                          </Text>
+                        )}
+                        <View
+                          style={[
+                            styles.bar,
+                            { height, backgroundColor: item.revenue > 0 ? teamPrimaryColor : AppColors.border },
+                          ]}
+                        />
+                      </View>
+                      <Text style={styles.barLabel}>{item.month}</Text>
                     </View>
-                    <Text style={styles.barLabel}>{item.month}</Text>
-                  </View>
-                );
-              })}
-            </View>
+                  );
+                })}
+              </View>
+            </ScrollView>
           </View>
         </View>
 
@@ -262,6 +296,11 @@ const styles = StyleSheet.create({
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
   },
+  debugText: {
+    marginTop: 10,
+    fontSize: 11,
+    color: AppColors.textSecondary,
+  },
   overviewLabel: {
     fontSize: 8,
     color: AppColors.textSecondary,
@@ -281,22 +320,28 @@ const styles = StyleSheet.create({
   chart: {
     marginTop: 8,
   },
+  chartScrollContent: {
+    paddingHorizontal: 6,
+    paddingTop: 4,
+    paddingBottom: 6,
+  },
   chartBars: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
     alignItems: 'flex-end',
     height: 280,
     paddingTop: 18,
   },
   barContainer: {
     alignItems: 'center',
-    flex: 1,
+    width: 86,
+    marginHorizontal: 10,
     justifyContent: 'flex-end',
   },
   barValue: {
     position: 'absolute',
     left: 0,
     right: 0,
+    paddingHorizontal: 2,
     fontSize: 9,
     fontWeight: '700' as const,
     color: AppColors.textPrimary,
@@ -307,6 +352,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     height: 200,
+    width: '100%',
     overflow: 'visible',
   },
   bar: {

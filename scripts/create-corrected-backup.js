@@ -1,10 +1,18 @@
 const fs = require('fs');
 const path = require('path');
 
-// Read the old backup with sales data  
-const oldBackup = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '../dev/backups/seasonpass_restore_panthers_2025.json'), 'utf8')
-);
+const defaultInputPath = path.join(__dirname, '../dev/backups/seasonpass_restore_panthers_2025.json');
+const inputPath = process.argv[2] || defaultInputPath;
+
+if (!fs.existsSync(inputPath)) {
+  console.error('❌ Input backup file not found.');
+  console.error('Expected:', inputPath);
+  console.error('Usage: node scripts/create-corrected-backup.js <inputBackupJson> [outputJson]');
+  process.exit(1);
+}
+
+// Read the old backup with sales data
+const oldBackup = JSON.parse(fs.readFileSync(inputPath, 'utf8'));
 
 // Read and parse the TypeScript schedule file
 const scheduleContent = fs.readFileSync(path.join(__dirname, '../constants/panthersSchedule.ts'), 'utf8');
@@ -33,7 +41,10 @@ const correctedBackup = {
 };
 
 // Save the corrected backup
-const outputPath = '/Users/joshscheiner/rork-app-ui-clone-clone/dev/backups/panthers_2025_2026_CORRECTED.json';
+const backupsDir = path.join(__dirname, '../dev/backups');
+fs.mkdirSync(backupsDir, { recursive: true });
+const defaultOutputPath = path.join(backupsDir, 'panthers_2025_2026_CORRECTED.json');
+const outputPath = process.argv[3] || defaultOutputPath;
 fs.writeFileSync(outputPath, JSON.stringify(correctedBackup, null, 2));
 
 console.log('✅ Corrected backup created!');

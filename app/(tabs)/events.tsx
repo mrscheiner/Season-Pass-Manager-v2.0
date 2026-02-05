@@ -1,16 +1,35 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Alert,
+  Modal,
+  TextInput,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Plus, Trash2 } from "lucide-react-native";
-import { useMemo, useCallback } from "react";
+import { Pencil, Plus, Trash2 } from "lucide-react-native";
+import { useMemo, useCallback, useState } from "react";
 
 import { AppColors } from "@/constants/appColors";
 import { useSeasonPass } from "@/providers/SeasonPassProvider";
 import AppFooter from "@/components/AppFooter";
 
 export default function EventsScreen() {
-  const { activeSeasonPass, activeSeasonPassId, removeEvent } = useSeasonPass();
+  const { miscEvents, addMiscEvent, updateMiscEvent, removeMiscEvent } = useSeasonPass();
 
-  const events = useMemo(() => activeSeasonPass?.events || [], [activeSeasonPass?.events]);
+  const events = useMemo(() => miscEvents || [], [miscEvents]);
+
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [editingEventId, setEditingEventId] = useState<string | null>(null);
+  const [eventName, setEventName] = useState('');
+  const [eventDate, setEventDate] = useState('');
+  const [paidText, setPaidText] = useState('');
+  const [soldText, setSoldText] = useState('');
+  const [isSold, setIsSold] = useState(false);
 
   const summary = useMemo(() => {
     let totalPaid = 0;
@@ -18,7 +37,7 @@ export default function EventsScreen() {
 
     events.forEach(event => {
       totalPaid += event.paid;
-      if (event.sold) {
+      if (event.sold != null) {
         totalSold += event.sold;
       }
     });
@@ -40,16 +59,86 @@ export default function EventsScreen() {
           text: 'Delete',
           style: 'destructive',
           onPress: async () => {
-            if (activeSeasonPassId) {
-              await removeEvent(activeSeasonPassId, eventId);
-            }
+            await removeMiscEvent(eventId);
           },
         },
       ]
     );
-  }, [activeSeasonPassId, removeEvent]);
+  }, [removeMiscEvent]);
 
-  const teamPrimaryColor = activeSeasonPass?.teamPrimaryColor || AppColors.primary;
+  const resetAddForm = useCallback(() => {
+    setEditingEventId(null);
+    setEventName('');
+    setEventDate('');
+    setPaidText('');
+    setSoldText('');
+    setIsSold(false);
+  }, []);
+
+  const handleOpenAdd = useCallback(() => {
+    resetAddForm();
+    setIsAddModalOpen(true);
+  }, [resetAddForm]);
+
+  const handleOpenEdit = useCallback((eventId: string) => {
+    const existing = events.find((ev) => ev.id === eventId);
+    if (!existing) return;
+    setEditingEventId(existing.id);
+    setEventName(existing.name ?? '');
+    setEventDate(existing.date ?? '');
+    setPaidText(String(existing.paid ?? 0));
+    const hasSold = existing.sold != null;
+    setIsSold(hasSold);
+    setSoldText(hasSold ? String(existing.sold ?? 0) : '');
+    setIsAddModalOpen(true);
+  }, [events]);
+
+  const handleCreateOrUpdate = useCallback(async () => {
+    const name = eventName.trim();
+    const date = eventDate.trim();
+    const paid = Number.parseFloat(paidText.trim() || '0');
+    const sold = isSold ? Number.parseFloat(soldText.trim() || '0') : null;
+
+    if (!name) {
+      Alert.alert('Missing name', 'Please enter an event name.');
+      return;
+    }
+    if (!date) {
+      Alert.alert('Missing date', 'Please enter an event date.');
+      return;
+    }
+    if (!Number.isFinite(paid) || paid < 0) {
+      Alert.alert('Invalid paid amount', 'Paid must be a valid number (0 or higher).');
+      return;
+    }
+    if (isSold && (!Number.isFinite(sold as number) || (sold as number) < 0)) {
+      Alert.alert('Invalid sold amount', 'Sold must be a valid number (0 or higher).');
+      return;
+    }
+
+    if (editingEventId) {
+      await updateMiscEvent(editingEventId, {
+        name,
+        date,
+        paid,
+        sold,
+        status: sold != null ? 'Sold' : 'Pending',
+      });
+    } else {
+      await addMiscEvent({
+        id: `misc_evt_${Date.now()}`,
+        name,
+        date,
+        paid,
+        sold,
+        status: sold != null ? 'Sold' : 'Pending',
+      });
+    }
+
+    setIsAddModalOpen(false);
+    resetAddForm();
+  }, [addMiscEvent, updateMiscEvent, editingEventId, eventName, eventDate, paidText, soldText, isSold, resetAddForm]);
+  const teamPrimaryColor = AppColors.primary;
 
   return (
     <View style={[styles.wrapper, { backgroundColor: teamPrimaryColor }]}>
@@ -58,19 +147,20 @@ export default function EventsScreen() {
           <View style={[styles.header, { backgroundColor: teamPrimaryColor }]}>
             <Text style={styles.headerTitle}>Events</Text>
             <Text style={styles.headerSubtitle}>Track your event tickets</Text>
+            <Text style={styles.headerNote}>Separate from Season Pass Analytics</Text>
           </View>
 
           <View style={styles.summaryCards}>
             <View style={styles.summaryCard}>
-              <Text style={styles.summaryLabel}>Total Paid</Text>
+              <Text style={styles.summaryLabel}>Total Cost</Text>
               <Text style={[styles.summaryValue, { color: AppColors.accent }]}>${summary.totalPaid.toFixed(2)}</Text>
             </View>
             <View style={styles.summaryCard}>
-              <Text style={styles.summaryLabel}>Total Sold</Text>
+              <Text style={styles.summaryLabel}>Total Revenue</Text>
               <Text style={[styles.summaryValue, { color: AppColors.success }]}>${summary.totalSold.toFixed(2)}</Text>
             </View>
             <View style={styles.summaryCard}>
-              <Text style={styles.summaryLabel}>Profit/Loss</Text>
+              <Text style={styles.summaryLabel}>Net</Text>
               <Text style={[styles.summaryValue, { color: summary.profitLoss >= 0 ? AppColors.success : AppColors.accent }]}>
                 ${summary.profitLoss.toFixed(2)}
               </Text>
@@ -80,7 +170,10 @@ export default function EventsScreen() {
           <View style={styles.eventsSection}>
             <View style={styles.eventsSectionHeader}>
               <Text style={styles.eventsTitle}>All Events ({events.length})</Text>
-              <TouchableOpacity style={[styles.addButton, { backgroundColor: teamPrimaryColor }]}>
+              <TouchableOpacity
+                style={[styles.addButton, { backgroundColor: teamPrimaryColor }]}
+                onPress={handleOpenAdd}
+              >
                 <Plus size={20} color={AppColors.white} />
                 <Text style={styles.addButtonText}>Add Event</Text>
               </TouchableOpacity>
@@ -96,22 +189,30 @@ export default function EventsScreen() {
                 <View key={event.id} style={styles.eventCard}>
                   <View style={styles.eventHeader}>
                     <Text style={styles.eventName}>{event.name}</Text>
-                    <TouchableOpacity 
-                      style={styles.deleteButton}
-                      onPress={() => handleDeleteEvent(event.id, event.name)}
-                    >
-                      <Trash2 size={20} color={AppColors.accent} />
-                    </TouchableOpacity>
+                    <View style={styles.eventActions}>
+                      <TouchableOpacity
+                        style={styles.actionIconButton}
+                        onPress={() => handleOpenEdit(event.id)}
+                      >
+                        <Pencil size={18} color={AppColors.textSecondary} />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.actionIconButton}
+                        onPress={() => handleDeleteEvent(event.id, event.name)}
+                      >
+                        <Trash2 size={20} color={AppColors.accent} />
+                      </TouchableOpacity>
+                    </View>
                   </View>
                   <Text style={styles.eventDate}>{event.date}</Text>
                   <View style={styles.eventDetails}>
                     <View style={styles.eventDetailRow}>
-                      <Text style={styles.eventDetailLabel}>Paid:</Text>
+                      <Text style={styles.eventDetailLabel}>Cost:</Text>
                       <Text style={styles.eventDetailValue}>${event.paid.toFixed(2)}</Text>
                     </View>
                     <View style={styles.eventDetailRow}>
-                      <Text style={styles.eventDetailLabel}>Sold:</Text>
-                      <Text style={styles.eventDetailValue}>{event.sold ? `$${event.sold.toFixed(2)}` : 'N/A'}</Text>
+                      <Text style={styles.eventDetailLabel}>Revenue:</Text>
+                      <Text style={styles.eventDetailValue}>{event.sold != null ? `$${event.sold.toFixed(2)}` : 'N/A'}</Text>
                     </View>
                   </View>
                   <View style={[styles.statusBadge, { backgroundColor: event.status === 'Sold' ? AppColors.success : AppColors.accent }]}>
@@ -121,6 +222,96 @@ export default function EventsScreen() {
               ))
             )}
           </View>
+
+          <Modal
+            visible={isAddModalOpen}
+            animationType="slide"
+            transparent
+            onRequestClose={() => setIsAddModalOpen(false)}
+          >
+            <View style={styles.modalBackdrop}>
+              <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+                style={styles.modalWrapper}
+              >
+                <View style={styles.modalCard}>
+                  <Text style={styles.modalTitle}>{editingEventId ? 'Edit Event' : 'Add Event'}</Text>
+
+                  <Text style={styles.inputLabel}>Name</Text>
+                  <TextInput
+                    style={styles.input}
+                    value={eventName}
+                    onChangeText={setEventName}
+                    placeholder="Concert / Single Game / etc"
+                    placeholderTextColor={AppColors.textLight}
+                  />
+
+                  <Text style={styles.inputLabel}>Date</Text>
+                  <TextInput
+                    style={styles.input}
+                    value={eventDate}
+                    onChangeText={setEventDate}
+                    placeholder="YYYY-MM-DD or any note"
+                    placeholderTextColor={AppColors.textLight}
+                  />
+
+                  <Text style={styles.inputLabel}>Paid</Text>
+                  <TextInput
+                    style={styles.input}
+                    value={paidText}
+                    onChangeText={setPaidText}
+                    keyboardType="decimal-pad"
+                    placeholder="0"
+                    placeholderTextColor={AppColors.textLight}
+                  />
+
+                  <View style={styles.soldRow}>
+                    <Text style={styles.inputLabel}>Sold?</Text>
+                    <TouchableOpacity
+                      onPress={() => setIsSold((v) => !v)}
+                      style={[styles.togglePill, { backgroundColor: isSold ? AppColors.success : AppColors.gray }]}
+                    >
+                      <Text style={[styles.togglePillText, { color: isSold ? AppColors.white : AppColors.textSecondary }]}>
+                        {isSold ? 'Yes' : 'No'}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+
+                  {isSold ? (
+                    <>
+                      <Text style={styles.inputLabel}>Sold Amount</Text>
+                      <TextInput
+                        style={styles.input}
+                        value={soldText}
+                        onChangeText={setSoldText}
+                        keyboardType="decimal-pad"
+                        placeholder="0"
+                        placeholderTextColor={AppColors.textLight}
+                      />
+                    </>
+                  ) : null}
+
+                  <View style={styles.modalButtons}>
+                    <TouchableOpacity
+                      style={[styles.modalButton, styles.modalButtonSecondary]}
+                      onPress={() => {
+                        setIsAddModalOpen(false);
+                        resetAddForm();
+                      }}
+                    >
+                      <Text style={styles.modalButtonSecondaryText}>Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[styles.modalButton, { backgroundColor: teamPrimaryColor }]}
+                        onPress={handleCreateOrUpdate}
+                    >
+                        <Text style={styles.modalButtonPrimaryText}>{editingEventId ? 'Save' : 'Add'}</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </KeyboardAvoidingView>
+            </View>
+          </Modal>
 
           <AppFooter />
         </ScrollView>
@@ -157,6 +348,13 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '600' as const,
     color: AppColors.gold,
+  },
+  headerNote: {
+    marginTop: 6,
+    fontSize: 9,
+    fontWeight: '700' as const,
+    color: AppColors.white,
+    opacity: 0.9,
   },
   summaryCards: {
     flexDirection: 'row',
@@ -260,6 +458,14 @@ const styles = StyleSheet.create({
   deleteButton: {
     padding: 4,
   },
+  eventActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  actionIconButton: {
+    padding: 4,
+  },
   eventDate: {
     fontSize: 10,
     color: AppColors.textLight,
@@ -294,6 +500,82 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 10,
     fontWeight: '700' as const,
+    color: AppColors.white,
+  },
+
+  modalBackdrop: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.45)',
+    justifyContent: 'flex-end',
+  },
+  modalWrapper: {
+    width: '100%',
+  },
+  modalCard: {
+    backgroundColor: AppColors.white,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    padding: 14,
+  },
+  modalTitle: {
+    fontSize: 11,
+    fontWeight: '800' as const,
+    color: AppColors.textPrimary,
+    marginBottom: 12,
+  },
+  inputLabel: {
+    fontSize: 9,
+    fontWeight: '700' as const,
+    color: AppColors.textSecondary,
+    marginBottom: 6,
+  },
+  input: {
+    backgroundColor: AppColors.gray,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    fontSize: 10,
+    color: AppColors.textPrimary,
+    marginBottom: 10,
+  },
+  soldRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  togglePill: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 999,
+  },
+  togglePillText: {
+    fontSize: 9,
+    fontWeight: '800' as const,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 6,
+  },
+  modalButton: {
+    flex: 1,
+    borderRadius: 10,
+    paddingVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalButtonSecondary: {
+    backgroundColor: AppColors.gray,
+  },
+  modalButtonSecondaryText: {
+    fontSize: 10,
+    fontWeight: '800' as const,
+    color: AppColors.textPrimary,
+  },
+  modalButtonPrimaryText: {
+    fontSize: 10,
+    fontWeight: '800' as const,
     color: AppColors.white,
   },
 });

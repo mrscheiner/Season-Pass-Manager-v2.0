@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "🏒 Dev: Start Everything",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/dev-startup.js",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "🔍 Dev: Health Check",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/health-check.js",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "🔄 Dev: Restart Servers",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/dev-restart.js",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}

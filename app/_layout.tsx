@@ -8,10 +8,12 @@ import { SeasonPassProvider } from "@/providers/SeasonPassProvider";
 import { trpc, trpcClient } from "@/lib/trpc";
 
 // Disable font scaling to prevent system settings from affecting layout
-if (Text.defaultProps == null) Text.defaultProps = {};
-Text.defaultProps.allowFontScaling = false;
-if (TextInput.defaultProps == null) TextInput.defaultProps = {};
-TextInput.defaultProps.allowFontScaling = false;
+const TextAny = Text as unknown as { defaultProps?: Record<string, any> };
+const TextInputAny = TextInput as unknown as { defaultProps?: Record<string, any> };
+if (TextAny.defaultProps == null) TextAny.defaultProps = {};
+TextAny.defaultProps.allowFontScaling = false;
+if (TextInputAny.defaultProps == null) TextInputAny.defaultProps = {};
+TextInputAny.defaultProps.allowFontScaling = false;
 
 SplashScreen.preventAutoHideAsync();
 
@@ -41,6 +43,13 @@ function RootLayoutNav() {
   return (
     <Stack screenOptions={{ headerBackTitle: "Back" }}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="edit-pass"
+        options={{
+          title: "Edit Season Pass",
+          presentation: "modal",
+        }}
+      />
       <Stack.Screen 
         name="setup" 
         options={{ 

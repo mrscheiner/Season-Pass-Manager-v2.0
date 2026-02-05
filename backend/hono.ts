@@ -25,21 +25,35 @@ app.use("*", cors({
   allowHeaders: ["Content-Type", "Authorization"],
 }));
 
+const logRequest = async (c: any, next: any) => {
+  console.log('[TRPC_SERVER] ========== INCOMING REQUEST ==========');
+  console.log('[TRPC_SERVER] Method:', c.req.method);
+  console.log('[TRPC_SERVER] URL:', c.req.url);
+  console.log('[TRPC_SERVER] Path:', c.req.path);
+  const startTime = Date.now();
+  await next();
+  const elapsed = Date.now() - startTime;
+  console.log('[TRPC_SERVER] Response completed in', elapsed, 'ms');
+  console.log('[TRPC_SERVER] ========================================');
+};
+
+// Primary: match the client URL `${baseUrl}/api/trpc`
 app.use(
-  "/trpc/*",
-  async (c, next) => {
-    console.log('[TRPC_SERVER] ========== INCOMING REQUEST ==========');
-    console.log('[TRPC_SERVER] Method:', c.req.method);
-    console.log('[TRPC_SERVER] URL:', c.req.url);
-    console.log('[TRPC_SERVER] Path:', c.req.path);
-    const startTime = Date.now();
-    await next();
-    const elapsed = Date.now() - startTime;
-    console.log('[TRPC_SERVER] Response completed in', elapsed, 'ms');
-    console.log('[TRPC_SERVER] ========================================');
-  },
+  "/api/trpc/*",
+  logRequest,
   trpcServer({
     endpoint: "/api/trpc",
+    router: appRouter,
+    createContext,
+  }),
+);
+
+// Back-compat: some runtimes mount at /trpc
+app.use(
+  "/trpc/*",
+  logRequest,
+  trpcServer({
+    endpoint: "/trpc",
     router: appRouter,
     createContext,
   }),

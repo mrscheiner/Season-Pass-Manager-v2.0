@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Alert, Platform, Dimensions } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSeasonPass } from '@/providers/SeasonPassProvider';
 import { AppColors } from '@/constants/appColors';
 
@@ -16,25 +15,7 @@ export default function RestoreScreen() {
 
   const recoveryCode = Array.isArray(code) ? code[0] : code;
 
-  useEffect(() => {
-    if (recoveryCode) {
-      const t = setTimeout(() => {
-        handleRestore();
-      }, 600);
-      return () => clearTimeout(t);
-    }
-  }, [recoveryCode]);
-
-  const handleCopy = async () => {
-    try {
-      // Clipboard set for web/native handled by provider elsewhere; fallback: do nothing
-      Alert.alert('Copied', 'Recovery code copied to clipboard');
-    } catch (e) {
-      console.warn('copy failed', e);
-    }
-  };
-
-  const handleRestore = async () => {
+  const handleRestore = useCallback(async () => {
     if (!recoveryCode) {
       Alert.alert('No code', 'No recovery code provided');
       return;
@@ -54,7 +35,16 @@ export default function RestoreScreen() {
     } finally {
       setIsRestoring(false);
     }
-  };
+  }, [recoveryCode, restoreFromRecoveryCode, router]);
+
+  useEffect(() => {
+    if (recoveryCode) {
+      const t = setTimeout(() => {
+        handleRestore();
+      }, 600);
+      return () => clearTimeout(t);
+    }
+  }, [recoveryCode, handleRestore]);
 
   return (
     <View style={styles.safe}>

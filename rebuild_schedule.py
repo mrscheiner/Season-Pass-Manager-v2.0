@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # Rebuild schedule file from scratch
 
+from pathlib import Path
+
 schedule_content = """import { Game } from './types';
 
 // NHL Team logo mapping for opponent logos
@@ -638,7 +640,9 @@ export default PANTHERS_20252026_SCHEDULE;
 """
 
 # Write the file
-with open('/Users/joshscheiner/rork-app-ui-clone-clone/constants/panthersSchedule.ts', 'w') as f:
-    f.write(schedule_content)
+output_path = Path(__file__).resolve().parent / 'constants' / 'panthersSchedule.ts'
+output_path.parent.mkdir(parents=True, exist_ok=True)
+with output_path.open('w', encoding='utf-8') as f:
+  f.write(schedule_content)
 
 print("Schedule file rebuilt successfully!")

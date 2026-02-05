@@ -3,31 +3,27 @@ import { createTRPCReact } from "@trpc/react-query";
 import superjson from "superjson";
 
 import type { AppRouter } from "@/backend/trpc/app-router";
+import { resolveApiBaseUrl } from "@/lib/apiBaseUrl";
 
 export const trpc = createTRPCReact<AppRouter>();
 
 const getBaseUrl = () => {
-  const url = process.env.EXPO_PUBLIC_RORK_API_BASE_URL;
-
-  if (!url) {
-    // In development, don't crash the app just because the Rork wrapper
-    // didn't inject the public API URL. Log a warning and return a
-    // sensible local fallback so the UI can render; network calls will
-    // fail but won't cause an immediate uncaught exception.
-    if (typeof __DEV__ !== 'undefined' && __DEV__) {
+  const resolved = resolveApiBaseUrl();
+  if (!resolved.baseUrl) {
+    if (typeof __DEV__ !== "undefined" && __DEV__) {
       // eslint-disable-next-line no-console
-      console.warn(
-        '[trpc] EXPO_PUBLIC_RORK_API_BASE_URL is not set — using fallback http://localhost:8787 (dev only)'
-      );
-      return 'http://localhost:8787';
+      console.warn("[trpc] API base URL is missing; cloud sync/schedule calls will fail.");
+      return "http://localhost:8787";
     }
-
-    throw new Error(
-      "Rork did not set EXPO_PUBLIC_RORK_API_BASE_URL, please use support",
-    );
+    throw new Error("Missing API base URL");
   }
 
-  return url;
+  if (typeof __DEV__ !== "undefined" && __DEV__) {
+    // eslint-disable-next-line no-console
+    console.log(`[trpc] Using API base (${resolved.source}):`, resolved.baseUrl);
+  }
+
+  return resolved.baseUrl;
 };
 
 export const trpcClient = trpc.createClient({
