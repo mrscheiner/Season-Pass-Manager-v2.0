@@ -16,6 +16,9 @@
         "simulator": true
       },
       "node": "16"
+      ,"env": {
+        "EXPO_USE_NPM": "1"
+      }
     }
     },
     "production": {
