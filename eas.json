@@ -12,12 +12,12 @@
     },
     "preview": {
       "distribution": "internal",
+      "node": "16",
+      "env": {
+        "EXPO_USE_NPM": "1"
+      },
       "ios": {
         "simulator": true
-      },
-      "node": "16"
-      ,"env": {
-        "EXPO_USE_NPM": "1"
       }
     }
     },
