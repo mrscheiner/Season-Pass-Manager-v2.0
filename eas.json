@@ -1,7 +1,10 @@
 {
   "build": {
-    "production": {
-      "ios": {}
-    }
+   "production": {
+  "env": {
+    "EXPO_USE_NPM": "1"
+  },
+  "ios": {
+    "resourceClass": "m-medium"
   }
 }
