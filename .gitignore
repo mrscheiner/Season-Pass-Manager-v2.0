@@ -46,3 +46,7 @@ dev/sync-store.json.tmp
 
 .env
 rork-eslint.config.js
+# Rork / exports / local copies
+rork-upload/
+scripts/rork-export.json
+season pass manager v2.0/

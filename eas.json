@@ -1,9 +1,15 @@
 {
+  "cli": {
+    "version": ">= 7.0.0"
+  },
   "build": {
     "production": {
-      "env": {
-        "EXPO_USE_NPM": "1"
+      "ios": {
+        "distribution": "app-store"
       }
     }
+  },
+  "submit": {
+    "production": {}
   }
 }

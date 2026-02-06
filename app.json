@@ -8,13 +8,11 @@
     "scheme": "rork-app",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    ,
     "splash": {
       "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.mrscheiner.seasonpassmanager",
@@ -23,9 +21,7 @@
         "ITSAppUsesNonExemptEncryption": false
       }
     },
-
     "jsEngine": "jsc",
-
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
@@ -39,14 +35,14 @@
         "INTERNET"
       ]
     },
-
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
-
-    "owner": "mrscheiner"
+    "owner": "mrscheiner",
+    "extra": {
+      "eas": {
+        "projectId": "210c8ac2-7b27-4452-83a9-a184a1d4808a"
+      }
+    }
   }
 }
-
-    
-      
